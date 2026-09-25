@@ -26,6 +26,11 @@
       "settings": {
         "logo": "shopify://shop_images/Untitled_design_1.png",
         "logo_width": 80,
+        "logo_offset_x": -2,
+        "logo_offset_y": 0,
+        "logo_width_mobile": 80,
+        "logo_offset_x_mobile": -60,
+        "logo_offset_y_mobile": 0,
         "menu": "main-menu",
         "use_editorial_sample_nav": true,
         "enable_sticky_header": true,
