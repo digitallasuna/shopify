@@ -34,7 +34,7 @@
         "cat_men": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/QuizGoru.png",
+            "image": "shopify://shop_images/young-man-in-bright-fashion.jpg",
             "title": "MEN",
             "description": "Tailored outerwear, shirts & denim",
             "link": "shopify://products/zxcvxvxcv",
@@ -44,6 +44,7 @@
         "cat_women": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/rack-of-womens-clothing.jpg",
             "title": "WOMEN",
             "description": "Dresses, knitwear & seasonal tailoring",
             "link": "/collections/women",
@@ -53,6 +54,7 @@
         "cat_kids": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/person-in-grey-suit-and-facemask-holds-a-young-baby.jpg",
             "title": "KIDS",
             "description": "Durable essentials for everyday wear",
             "link": "/collections/kids",
