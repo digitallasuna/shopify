@@ -11,38 +11,10 @@
   "sections": {
     "main": {
       "type": "404",
-      "disabled": true,
       "settings": {}
-    },
-    "featured_categories_JqBmQV": {
-      "type": "featured-categories",
-      "blocks": {
-        "category_368mgU": {
-          "type": "category",
-          "settings": {
-            "title": "MEN",
-            "description": "",
-            "link": "",
-            "overlay_opacity": 10
-          }
-        }
-      },
-      "block_order": [
-        "category_368mgU"
-      ],
-      "name": "Featured Categories",
-      "settings": {
-        "eyebrow": "DEPARTMENTS",
-        "heading": "SHOP BY CATEGORY",
-        "description": "Explore curated collections crafted for the modern wardrobe.",
-        "columns_desktop": 4,
-        "media_aspect_ratio": "portrait",
-        "section_spacing": "medium"
-      }
     }
   },
   "order": [
-    "main",
-    "featured_categories_JqBmQV"
+    "main"
   ]
 }
