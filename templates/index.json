@@ -11,55 +11,7 @@
   "sections": {
     "hero": {
       "type": "hero-banner",
-      "blocks": {
-        "slide_1": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/priscilla-du-preez-dlxLGIy-2VU-unsplash.jpg",
-            "image_mobile": "shopify://shop_images/priscilla-du-preez-dlxLGIy-2VU-unsplash.jpg",
-            "eyebrow": "NEW SEASON",
-            "heading": "THE NEW STANDARD",
-            "description": "Contemporary pieces designed for everyday confidence.",
-            "primary_button_text": "SHOP MEN",
-            "primary_button_link": "/collections/men",
-            "secondary_button_text": "SHOP WOMEN",
-            "secondary_button_link": "/collections/women",
-            "content_position": "middle-center",
-            "text_alignment": "center",
-            "overlay_opacity": 25,
-            "text_color": "#ffffff"
-          }
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Sep_25_2026_07_42_38_PM.png",
-            "image_mobile": "shopify://shop_images/ChatGPT_Image_Sep_25_2026_07_42_38_PM.png",
-            "eyebrow": "AUTUMN / WINTER",
-            "heading": "TIMELESS TAILORING",
-            "description": "Crafted from fine wool blends and modern silhouettes.",
-            "primary_button_text": "EXPLORE COLLECTION",
-            "primary_button_link": "/collections/footwear",
-            "secondary_button_text": "VIEW LOOKBOOK",
-            "secondary_button_link": "/collections/accessories",
-            "content_position": "middle-center",
-            "text_alignment": "center",
-            "overlay_opacity": 30,
-            "text_color": "#ffffff"
-          }
-        }
-      },
-      "block_order": [
-        "slide_1",
-        "slide_2"
-      ],
       "settings": {
-        "enable_autoplay": true,
-        "autoplay_interval": 5,
-        "transition_style": "fade",
-        "show_arrows": true,
-        "show_dots": true,
-        "pause_on_hover": true,
         "section_height": "small",
         "full_width": true,
         "image": "shopify://shop_images/mens-fashion-hand-in-jeans-pocket.jpg",
