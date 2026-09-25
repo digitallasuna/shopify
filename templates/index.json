@@ -12,6 +12,22 @@
     "hero": {
       "type": "hero-banner",
       "blocks": {
+        "slide_A3TV6R": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "NEW SEASON",
+            "heading": "THE NEW STANDARD",
+            "description": "Contemporary pieces designed for everyday confidence.",
+            "primary_button_text": "SHOP MEN",
+            "primary_button_link": "",
+            "secondary_button_text": "SHOP WOMEN",
+            "secondary_button_link": "",
+            "content_position": "middle-center",
+            "text_alignment": "center",
+            "overlay_opacity": 25,
+            "text_color": "#ffffff"
+          }
+        },
         "slide_jyYpLN": {
           "type": "slide",
           "settings": {
@@ -32,6 +48,7 @@
         }
       },
       "block_order": [
+        "slide_A3TV6R",
         "slide_jyYpLN"
       ],
       "settings": {
