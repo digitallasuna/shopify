@@ -25,7 +25,7 @@
         "text_alignment": "center",
         "overlay_opacity": 50,
         "text_color": "#ffffff",
-        "section_height": "large",
+        "section_height": "small",
         "full_width": true
       }
     },
