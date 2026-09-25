@@ -23,7 +23,7 @@
         "secondary_button_link": "shopify://products/fsdfsdfsdf",
         "content_position": "middle-center",
         "text_alignment": "center",
-        "overlay_opacity": 25,
+        "overlay_opacity": 50,
         "text_color": "#ffffff",
         "section_height": "large",
         "full_width": true
