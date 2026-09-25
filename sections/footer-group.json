@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Footer",
@@ -8,37 +17,54 @@
         "menu_shop": {
           "type": "link_list",
           "settings": {
-            "heading": "SHOP"
+            "heading": "SHOP",
+            "menu": ""
           }
         },
         "menu_care": {
           "type": "link_list",
           "settings": {
-            "heading": "CUSTOMER CARE"
+            "heading": "CUSTOMER CARE",
+            "menu": ""
+          }
+        },
+        "link_list_tcHdhd": {
+          "type": "link_list",
+          "settings": {
+            "heading": "SHOP",
+            "menu": ""
           }
         },
         "menu_about": {
           "type": "link_list",
           "settings": {
-            "heading": "ABOUT"
+            "heading": "ABOUT",
+            "menu": ""
           }
         },
         "menu_legal": {
           "type": "link_list",
           "settings": {
-            "heading": "LEGAL"
+            "heading": "LEGAL",
+            "menu": ""
           }
         }
       },
       "block_order": [
         "menu_shop",
         "menu_care",
+        "link_list_tcHdhd",
         "menu_about",
         "menu_legal"
       ],
       "settings": {
         "brand_headline": "METICULOUS",
         "brand_description": "Modern, refined fashion crafted with architectural precision and enduring quality.",
+        "social_instagram": "",
+        "social_facebook": "",
+        "social_tiktok": "",
+        "social_youtube": "",
+        "social_pinterest": "",
         "show_payment_icons": true,
         "show_localization": true,
         "bg_color": "soft_beige"
