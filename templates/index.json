@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -13,7 +22,7 @@
         "content_position": "middle-center",
         "text_alignment": "center",
         "overlay_opacity": 25,
-        "text_color": "#FFFFFF",
+        "text_color": "#ffffff",
         "section_height": "large",
         "full_width": true
       }
@@ -24,9 +33,11 @@
         "cat_men": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/WhatsAppImage2026-09-24at9.59.44PM_1.jpg",
             "title": "MEN",
             "description": "Tailored outerwear, shirts & denim",
-            "link": "/collections/men"
+            "link": "/collections/men",
+            "overlay_opacity": 10
           }
         },
         "cat_women": {
@@ -34,7 +45,8 @@
           "settings": {
             "title": "WOMEN",
             "description": "Dresses, knitwear & seasonal tailoring",
-            "link": "/collections/women"
+            "link": "/collections/women",
+            "overlay_opacity": 10
           }
         },
         "cat_kids": {
@@ -42,7 +54,8 @@
           "settings": {
             "title": "KIDS",
             "description": "Durable essentials for everyday wear",
-            "link": "/collections/kids"
+            "link": "/collections/kids",
+            "overlay_opacity": 10
           }
         },
         "cat_footwear": {
@@ -50,7 +63,8 @@
           "settings": {
             "title": "FOOTWEAR",
             "description": "Crafted leather shoes, boots & trainers",
-            "link": "/collections/footwear"
+            "link": "/collections/footwear",
+            "overlay_opacity": 10
           }
         },
         "cat_accessories": {
@@ -58,7 +72,8 @@
           "settings": {
             "title": "ACCESSORIES",
             "description": "Jewellery, leather bags & finishing touches",
-            "link": "/collections/accessories"
+            "link": "/collections/accessories",
+            "overlay_opacity": 10
           }
         },
         "cat_beauty": {
@@ -66,7 +81,8 @@
           "settings": {
             "title": "BEAUTY",
             "description": "Formulations for skin, hair & scent",
-            "link": "/collections/beauty"
+            "link": "/collections/beauty",
+            "overlay_opacity": 10
           }
         },
         "cat_sports": {
@@ -74,7 +90,8 @@
           "settings": {
             "title": "SPORTS",
             "description": "Performance apparel & training gear",
-            "link": "/collections/sports"
+            "link": "/collections/sports",
+            "overlay_opacity": 10
           }
         }
       },
@@ -99,6 +116,7 @@
     "new_arrivals": {
       "type": "featured-collection",
       "settings": {
+        "collection": "",
         "eyebrow": "CURATED SELECTION",
         "heading": "NEW ARRIVALS",
         "description": "Discover the latest additions to our contemporary collection.",
@@ -129,6 +147,7 @@
     "curated_collection": {
       "type": "featured-collection",
       "settings": {
+        "collection": "",
         "eyebrow": "WARDROBE FOUNDATIONS",
         "heading": "SEASONAL ESSENTIALS",
         "description": "Enduring staples designed with architectural precision and natural textures.",
@@ -150,7 +169,8 @@
           "settings": {
             "icon": "delivery",
             "title": "COMPLIMENTARY DELIVERY",
-            "description": "On eligible orders"
+            "description": "On eligible orders",
+            "link": ""
           }
         },
         "badge_returns": {
@@ -158,7 +178,8 @@
           "settings": {
             "icon": "returns",
             "title": "EASY RETURNS",
-            "description": "Straightforward return policy"
+            "description": "Straightforward return policy",
+            "link": ""
           }
         },
         "badge_secure": {
@@ -166,7 +187,8 @@
           "settings": {
             "icon": "secure",
             "title": "SECURE CHECKOUT",
-            "description": "Safe & encrypted payments"
+            "description": "Safe & encrypted payments",
+            "link": ""
           }
         },
         "badge_support": {
@@ -174,7 +196,8 @@
           "settings": {
             "icon": "support",
             "title": "CUSTOMER CARE",
-            "description": "Dedicated client assistance"
+            "description": "Dedicated client assistance",
+            "link": ""
           }
         }
       },
@@ -185,6 +208,7 @@
         "badge_support"
       ],
       "settings": {
+        "heading": "",
         "bg_color": "warm_ivory",
         "section_spacing": "small",
         "show_border_top": true,
