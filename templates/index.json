@@ -12,6 +12,8 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
+        "image": "shopify://shop_images/ChatGPT_Image_Sep_25_2026_07_42_38_PM.png",
+        "image_mobile": "shopify://shop_images/ChatGPT_Image_Sep_25_2026_07_42_38_PM.png",
         "eyebrow": "NEW SEASON",
         "heading": "THE NEW STANDARD",
         "description": "Contemporary pieces designed for everyday confidence.",
