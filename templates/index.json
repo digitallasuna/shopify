@@ -208,6 +208,7 @@
         "badge_secure",
         "badge_support"
       ],
+      "disabled": true,
       "settings": {
         "heading": "",
         "bg_color": "warm_ivory",
