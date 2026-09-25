@@ -11,6 +11,29 @@
   "sections": {
     "hero": {
       "type": "hero-banner",
+      "blocks": {
+        "slide_jyYpLN": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/priscilla-du-preez-dlxLGIy-2VU-unsplash_6e4a784e-55e6-4b2a-b946-6a046608614e.jpg",
+            "image_mobile": "shopify://shop_images/priscilla-du-preez-dlxLGIy-2VU-unsplash_6e4a784e-55e6-4b2a-b946-6a046608614e.jpg",
+            "eyebrow": "NEW SEASON",
+            "heading": "THE NEW STANDARD",
+            "description": "Contemporary pieces designed for everyday confidence.",
+            "primary_button_text": "SHOP MEN",
+            "primary_button_link": "shopify://products/zxcvxvxcv",
+            "secondary_button_text": "SHOP WOMEN",
+            "secondary_button_link": "shopify://products/fsdfsdfsdf",
+            "content_position": "middle-center",
+            "text_alignment": "center",
+            "overlay_opacity": 25,
+            "text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "slide_jyYpLN"
+      ],
       "settings": {
         "section_height": "small",
         "full_width": true,
