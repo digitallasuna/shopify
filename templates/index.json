@@ -112,7 +112,7 @@
         "description": "Explore curated collections crafted for the modern wardrobe.",
         "columns_desktop": 4,
         "media_aspect_ratio": "portrait",
-        "section_spacing": "medium"
+        "section_spacing": "small"
       }
     },
     "new_arrivals": {
@@ -129,7 +129,7 @@
         "show_quick_add": true,
         "show_view_all": true,
         "view_all_text": "View All Products",
-        "section_spacing": "medium"
+        "section_spacing": "small"
       }
     },
     "editorial_split": {
@@ -160,7 +160,7 @@
         "show_quick_add": true,
         "show_view_all": true,
         "view_all_text": "View All Essentials",
-        "section_spacing": "medium"
+        "section_spacing": "small"
       }
     },
     "trust_badges": {
@@ -226,7 +226,7 @@
         "button_text": "SUBSCRIBE",
         "privacy_note": "By subscribing, you agree to our Privacy Policy and consent to receive marketing updates.",
         "bg_color": "soft_beige",
-        "section_spacing": "medium",
+        "section_spacing": "small",
         "full_width": false
       }
     }
