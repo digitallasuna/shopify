@@ -102,6 +102,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--color-primary);
   }
 
   /* Height Options */
@@ -118,7 +119,10 @@
     height: 85vh;
   }
   .hero-banner--height-full {
+    min-height: 100vh;
     min-height: 100svh;
+    height: 100vh;
+    height: 100svh;
   }
 
   /* Background Media */
@@ -128,24 +132,40 @@
     width: 100%;
     height: 100%;
     z-index: 1;
+    overflow: hidden;
+  }
+
+  .hero-banner__media picture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
   .hero-banner__image {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
+    max-width: none;
     object-fit: cover;
     object-position: center;
+    display: block;
   }
 
   /* Placeholder Styling when no image is uploaded */
   .hero-banner__placeholder {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, #1f1f1f 0%, #111111 50%, #2a151b 100%);
-    position: relative;
   }
 
   .hero-banner__placeholder-bg {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     opacity: 0.15;
@@ -157,6 +177,8 @@
   .hero-banner__overlay {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
     background: var(--hero-overlay);
     z-index: 2;
     pointer-events: none;
@@ -325,15 +347,21 @@
   @media (max-width: 768px) {
     .hero-banner--height-small {
       min-height: 420px;
-      height: 50vh;
+      height: 55vh;
     }
     .hero-banner--height-medium {
       min-height: 520px;
-      height: 65vh;
+      height: 70vh;
     }
     .hero-banner--height-large {
       min-height: 600px;
-      height: 75vh;
+      height: 85vh;
+    }
+    .hero-banner--height-full {
+      min-height: 100vh;
+      min-height: 100svh;
+      height: 100vh;
+      height: 100svh;
     }
 
     .hero-banner__container {
