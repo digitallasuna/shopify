@@ -1,0 +1,303 @@
+{% comment %}
+  Meticulous Fashion - Editorial Split Section
+  Side-by-side fashion storytelling layout with configurable media position,
+  surface background options, rich typography, and CTA.
+{% endcomment %}
+
+{%- liquid
+  assign bg_class = 'bg-soft-beige'
+  if section.settings.bg_color == 'warm_ivory'
+    assign bg_class = 'bg-warm-ivory'
+  elsif section.settings.bg_color == 'dark'
+    assign bg_class = 'bg-dark'
+  endif
+-%}
+
+<section
+  id="EditorialSplit-{{ section.id }}"
+  class="editorial-split {{ bg_class }} section-spacing--{{ section.settings.section_spacing | default: 'medium' }}"
+  role="region"
+  aria-label="{{ section.settings.heading | default: 'Editorial Feature' | escape }}"
+>
+  <div class="page-container">
+    <div class="editorial-split__grid image-position--{{ section.settings.image_position | default: 'left' }}">
+      <!-- Media Column -->
+      <div class="editorial-split__media-col">
+        <div class="editorial-split__media">
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1400
+              | image_tag:
+                class: 'editorial-split__image',
+                widths: '400, 600, 800, 1000, 1200, 1400',
+                sizes: '(max-width: 768px) 100vw, 50vw',
+                loading: 'lazy',
+                alt: section.settings.image.alt | default: section.settings.heading | escape
+            }}
+          {%- else -%}
+            <!-- Editorial Placeholder Media -->
+            <div class="editorial-split__placeholder">
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'editorial-split__placeholder-svg' }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Content Column -->
+      <div class="editorial-split__content-col align--{{ section.settings.text_alignment | default: 'left' }}">
+        <div class="editorial-split__content">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="editorial-split__eyebrow text-eyebrow">
+              {{ section.settings.eyebrow }}
+            </span>
+          {%- endif -%}
+
+          {%- if section.settings.heading != blank -%}
+            <h2 class="editorial-split__heading text-h2 font-heading">
+              {{ section.settings.heading }}
+            </h2>
+          {%- endif -%}
+
+          {%- if section.settings.description != blank -%}
+            <p class="editorial-split__description text-lead">
+              {{ section.settings.description }}
+            </p>
+          {%- endif -%}
+
+          {%- if section.settings.button_text != blank -%}
+            <div class="editorial-split__actions">
+              <a
+                href="{{ section.settings.button_link | default: routes.all_products_collection_url }}"
+                class="btn {% if section.settings.bg_color == 'dark' %}btn--secondary{% else %}btn--primary{% endif %} editorial-split__btn"
+              >
+                {{ section.settings.button_text }}
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .editorial-split {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .editorial-split__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+  }
+
+  /* Image Position Desktop */
+  .editorial-split__grid.image-position--right .editorial-split__media-col {
+    order: 2;
+  }
+  .editorial-split__grid.image-position--right .editorial-split__content-col {
+    order: 1;
+  }
+
+  /* Media Column */
+  .editorial-split__media-col {
+    width: 100%;
+  }
+
+  .editorial-split__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: var(--card-radius);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+  }
+
+  .editorial-split__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform var(--transition-slow);
+  }
+
+  .editorial-split__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface);
+  }
+
+  .editorial-split__placeholder-svg {
+    width: 70%;
+    height: 70%;
+    opacity: 0.4;
+  }
+
+  @media (hover: hover) {
+    .editorial-split:hover .editorial-split__image {
+      transform: scale(1.025);
+    }
+  }
+
+  /* Content Column */
+  .editorial-split__content-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .editorial-split__content-col.align--center {
+    align-items: center;
+    text-align: center;
+  }
+  .editorial-split__content-col.align--left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .editorial-split__content {
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .editorial-split__heading {
+    margin-bottom: 1.25rem;
+    line-height: 1.15;
+  }
+
+  .editorial-split__description {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .editorial-split__btn {
+    min-width: 190px;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 900px) {
+    .editorial-split__grid {
+      grid-template-columns: 1fr;
+      gap: 2.25rem;
+    }
+
+    .editorial-split__grid.image-position--right .editorial-split__media-col {
+      order: 1;
+    }
+    .editorial-split__grid.image-position--right .editorial-split__content-col {
+      order: 2;
+    }
+
+    .editorial-split__media {
+      aspect-ratio: 4 / 3;
+    }
+
+    .editorial-split__content {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .editorial-split__btn {
+      width: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Editorial Split",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position (Desktop)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "THE EDIT"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "STYLE WITHOUT COMPROMISE"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover considered pieces designed to move effortlessly between everyday life and special moments."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "EXPLORE THE EDIT"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "bg_color",
+      "label": "Background color",
+      "options": [
+        { "value": "warm_ivory", "label": "Warm Ivory (Page Default)" },
+        { "value": "soft_beige", "label": "Soft Beige (Surface)" },
+        { "value": "dark", "label": "Charcoal Black" }
+      ],
+      "default": "soft_beige"
+    },
+    {
+      "type": "select",
+      "id": "section_spacing",
+      "label": "Section spacing",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Split"
+    }
+  ]
+}
+{% endschema %}

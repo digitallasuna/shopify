@@ -1,0 +1,238 @@
+{% comment %}
+  Mobile Navigation Drawer
+  Vanilla JS slide-out navigation with accessible accordions, focus trapping, and keyboard controls.
+{% endcomment %}
+
+<div
+  id="MobileMenuDrawer"
+  class="mobile-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Mobile Navigation"
+  aria-hidden="true"
+  hidden
+>
+  <div class="mobile-drawer__backdrop" data-drawer-close></div>
+
+  <div class="mobile-drawer__panel">
+    <div class="mobile-drawer__header">
+      <span class="mobile-drawer__title text-eyebrow">Department Menu</span>
+      <button
+        type="button"
+        class="mobile-drawer__close btn"
+        aria-label="Close navigation menu"
+        data-drawer-close
+      >
+        {% render 'icon', name: 'close' %}
+        <span class="visually-hidden">Close menu</span>
+      </button>
+    </div>
+
+    <!-- Search in Mobile Drawer -->
+    <div class="mobile-drawer__search">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="mobile-drawer__search-form">
+        <input
+          type="search"
+          name="q"
+          placeholder="Search collections & products..."
+          class="form-input mobile-drawer__search-input"
+          aria-label="Search"
+          autocomplete="off"
+        >
+        <button type="submit" class="mobile-drawer__search-btn" aria-label="Submit search">
+          {% render 'icon', name: 'search' %}
+        </button>
+      </form>
+    </div>
+
+    <nav class="mobile-drawer__nav" role="navigation" aria-label="Mobile Department Navigation">
+      <ul class="mobile-drawer__list" role="list">
+        {%- if menu != blank and menu.links.size > 0 and has_nested_links -%}
+          {%- for link in menu.links -%}
+            <li class="mobile-drawer__item">
+              {%- if link.links.size > 0 -%}
+                <details class="mobile-nav__accordion">
+                  <summary class="mobile-nav__summary">
+                    <span class="mobile-nav__label">{{ link.title }}</span>
+                    {% render 'icon', name: 'chevron-down', class: 'accordion-chevron' %}
+                  </summary>
+                  <ul class="mobile-nav__sublist" role="list">
+                    {%- for child in link.links -%}
+                      <li class="mobile-nav__subitem">
+                        {%- if child.links.size > 0 -%}
+                          <details class="mobile-nav__subaccordion">
+                            <summary class="mobile-nav__subsummary">
+                              <span>{{ child.title }}</span>
+                              {% render 'icon', name: 'chevron-down', class: 'accordion-chevron' %}
+                            </summary>
+                            <ul class="mobile-nav__grandsublist" role="list">
+                              {%- for grandchild in child.links -%}
+                                <li>
+                                  <a href="{{ grandchild.url }}" class="mobile-nav__link">
+                                    {{ grandchild.title }}
+                                  </a>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          </details>
+                        {%- else -%}
+                          <a href="{{ child.url }}" class="mobile-nav__link">
+                            {{ child.title }}
+                          </a>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </details>
+              {%- else -%}
+                <a href="{{ link.url }}" class="mobile-nav__direct-link">
+                  {{ link.title }}
+                </a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+
+        {%- else -%}
+          {% comment %}
+            Editorial 7-Department Fashion Fallback when Shopify Admin menus have not yet been nested
+          {% endcomment %}
+
+          <!-- 1. MEN -->
+          <li class="mobile-drawer__item">
+            <details class="mobile-nav__accordion">
+              <summary class="mobile-nav__summary">
+                <span class="mobile-nav__label">MEN</span>
+                {% render 'icon', name: 'chevron-down', class: 'accordion-chevron' %}
+              </summary>
+              <ul class="mobile-nav__sublist" role="list">
+                <li><a href="{{ routes.collections_url }}/men-jeans" class="mobile-nav__link">Jeans</a></li>
+                <li><a href="{{ routes.collections_url }}/men-shirts" class="mobile-nav__link">Shirts</a></li>
+                <li><a href="{{ routes.collections_url }}/men-sweaters" class="mobile-nav__link">Sweaters</a></li>
+                <li><a href="{{ routes.collections_url }}/men-hoodies" class="mobile-nav__link">Hoodies</a></li>
+                <li><a href="{{ routes.collections_url }}/men-coats-jackets" class="mobile-nav__link">Coats & Jackets</a></li>
+                <li class="mobile-nav__view-all"><a href="{{ routes.collections_url }}/men" class="mobile-nav__link mobile-nav__link--view-all">View All Men &rarr;</a></li>
+              </ul>
+            </details>
+          </li>
+
+          <!-- 2. WOMEN -->
+          <li class="mobile-drawer__item">
+            <details class="mobile-nav__accordion">
+              <summary class="mobile-nav__summary">
+                <span class="mobile-nav__label">WOMEN</span>
+                {% render 'icon', name: 'chevron-down', class: 'accordion-chevron' %}
+              </summary>
+              <ul class="mobile-nav__sublist" role="list">
+                <li><a href="{{ routes.collections_url }}/women-dresses" class="mobile-nav__link">Dresses</a></li>
+                <li><a href="{{ routes.collections_url }}/women-suits-tailoring" class="mobile-nav__link">Suits & Tailoring</a></li>
+                <li><a href="{{ routes.collections_url }}/women-sweaters" class="mobile-nav__link">Sweaters</a></li>
+                <li><a href="{{ routes.collections_url }}/women-jeans" class="mobile-nav__link">Jeans</a></li>
+                <li><a href="{{ routes.collections_url }}/women-coats-jackets" class="mobile-nav__link">Coats & Jackets</a></li>
+                <li><a href="{{ routes.collections_url }}/women-sleepwear" class="mobile-nav__link">Sleepwear</a></li>
+                <li class="mobile-nav__view-all"><a href="{{ routes.collections_url }}/women" class="mobile-nav__link mobile-nav__link--view-all">View All Women &rarr;</a></li>
+              </ul>
+            </details>
+          </li>
+
+          <!-- 3. KIDS -->
+          <li class="mobile-drawer__item">
+            <details class="mobile-nav__accordion">
+              <summary class="mobile-nav__summary">
+                <span class="mobile-nav__label">KIDS</span>
+                {% render 'icon', name: 'chevron-down', class: 'accordion-chevron' %}
+              </summary>
+              <ul class="mobile-nav__sublist" role="list">
+                <li><a href="{{ routes.collections_url }}/kids-dresses" class="mobile-nav__link">Dresses</a></li>
+                <li><a href="{{ routes.collections_url }}/kids-jeans" class="mobile-nav__link">Jeans</a></li>
+                <li><a href="{{ routes.collections_url }}/kids-shirts" class="mobile-nav__link">Shirts</a></li>
+                <li><a href="{{ routes.collections_url }}/kids-sweaters" class="mobile-nav__link">Sweaters</a></li>
+                <li><a href="{{ routes.collections_url }}/kids-coats-jackets" class="mobile-nav__link">Coats & Jackets</a></li>
+                <li class="mobile-nav__view-all"><a href="{{ routes.collections_url }}/kids" class="mobile-nav__link mobile-nav__link--view-all">View All Kids &rarr;</a></li>
+              </ul>
+            </details>
+          </li>
+
+          <!-- 4. FOOTWEAR -->
+          <li class="mobile-drawer__item">
+            <details class="mobile-nav__accordion">
+              <summary class="mobile-nav__summary">
+                <span class="mobile-nav__label">FOOTWEAR</span>
+                {% render 'icon', name: 'chevron-down', class: 'accordion-chevron' %}
+              </summary>
+              <ul class="mobile-nav__sublist" role="list">
+                <li><a href="{{ routes.collections_url }}/footwear-men" class="mobile-nav__link">Men's Footwear</a></li>
+                <li><a href="{{ routes.collections_url }}/footwear-women" class="mobile-nav__link">Women's Footwear</a></li>
+                <li><a href="{{ routes.collections_url }}/footwear-kids" class="mobile-nav__link">Kids' Footwear</a></li>
+                <li class="mobile-nav__view-all"><a href="{{ routes.collections_url }}/footwear" class="mobile-nav__link mobile-nav__link--view-all">View All Footwear &rarr;</a></li>
+              </ul>
+            </details>
+          </li>
+
+          <!-- 5. ACCESSORIES -->
+          <li class="mobile-drawer__item">
+            <details class="mobile-nav__accordion">
+              <summary class="mobile-nav__summary">
+                <span class="mobile-nav__label">ACCESSORIES</span>
+                {% render 'icon', name: 'chevron-down', class: 'accordion-chevron' %}
+              </summary>
+              <ul class="mobile-nav__sublist" role="list">
+                <li><a href="{{ routes.collections_url }}/jewellery" class="mobile-nav__link">Jewellery</a></li>
+                <li><a href="{{ routes.collections_url }}/bags" class="mobile-nav__link">Bags</a></li>
+                <li><a href="{{ routes.collections_url }}/hats" class="mobile-nav__link">Hats</a></li>
+                <li><a href="{{ routes.collections_url }}/hair-accessories" class="mobile-nav__link">Hair Accessories</a></li>
+                <li class="mobile-nav__view-all"><a href="{{ routes.collections_url }}/accessories" class="mobile-nav__link mobile-nav__link--view-all">View All Accessories &rarr;</a></li>
+              </ul>
+            </details>
+          </li>
+
+          <!-- 6. BEAUTY -->
+          <li class="mobile-drawer__item">
+            <a href="{{ routes.collections_url }}/beauty" class="mobile-nav__direct-link">
+              <span class="mobile-nav__label">BEAUTY</span>
+              {% render 'icon', name: 'chevron-right', class: 'direct-link-chevron' %}
+            </a>
+          </li>
+
+          <!-- 7. SPORTS -->
+          <li class="mobile-drawer__item">
+            <details class="mobile-nav__accordion">
+              <summary class="mobile-nav__summary">
+                <span class="mobile-nav__label">SPORTS</span>
+                {% render 'icon', name: 'chevron-down', class: 'accordion-chevron' %}
+              </summary>
+              <ul class="mobile-nav__sublist" role="list">
+                <li><a href="{{ routes.collections_url }}/football" class="mobile-nav__link">Football</a></li>
+                <li><a href="{{ routes.collections_url }}/boxing" class="mobile-nav__link">Boxing</a></li>
+                <li><a href="{{ routes.collections_url }}/badminton" class="mobile-nav__link">Badminton</a></li>
+                <li><a href="{{ routes.collections_url }}/swimming" class="mobile-nav__link">Swimming</a></li>
+                <li><a href="{{ routes.collections_url }}/table-tennis" class="mobile-nav__link">Table Tennis</a></li>
+                <li><a href="{{ routes.collections_url }}/tennis" class="mobile-nav__link">Tennis</a></li>
+                <li><a href="{{ routes.collections_url }}/basketball" class="mobile-nav__link">Basketball</a></li>
+                <li><a href="{{ routes.collections_url }}/baseball" class="mobile-nav__link">Baseball</a></li>
+                <li class="mobile-nav__view-all"><a href="{{ routes.collections_url }}/sports" class="mobile-nav__link mobile-nav__link--view-all">View All Sports &rarr;</a></li>
+              </ul>
+            </details>
+          </li>
+        {%- endif -%}
+      </ul>
+    </nav>
+
+    <!-- Bottom Actions in Drawer -->
+    <div class="mobile-drawer__footer">
+      {%- if shop.customer_accounts_enabled -%}
+        <a
+          href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+          class="mobile-drawer__footer-link"
+        >
+          {% render 'icon', name: 'account' %}
+          <span>{% if customer %}My Account{% else %}Sign In / Register{% endif %}</span>
+        </a>
+      {%- endif -%}
+
+      <a href="{{ routes.cart_url }}" class="mobile-drawer__footer-link">
+        {% render 'icon', name: 'cart' %}
+        <span>Shopping Bag (<span data-cart-count>{{ cart.item_count }}</span>)</span>
+      </a>
+    </div>
+  </div>
+</div>

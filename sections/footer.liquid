@@ -1,0 +1,568 @@
+{% comment %}
+  Meticulous Fashion - Editorial Multi-Column Footer
+  Includes brand story, social media links, dynamic menu columns,
+  native payment types, optional localization, and legal copyright bar.
+{% endcomment %}
+
+{%- liquid
+  assign bg_class = 'bg-soft-beige'
+  if section.settings.bg_color == 'warm_ivory'
+    assign bg_class = 'bg-warm-ivory'
+  elsif section.settings.bg_color == 'dark'
+    assign bg_class = 'bg-dark'
+  endif
+-%}
+
+<footer
+  id="SiteFooter-{{ section.id }}"
+  class="site-footer {{ bg_class }}"
+  role="contentinfo"
+  aria-label="Footer"
+>
+  <div class="page-container">
+    <!-- Top Footer: Brand Area & Navigation Columns -->
+    <div class="site-footer__main">
+      <!-- Column 1: Brand Story & Socials -->
+      <div class="site-footer__brand-col">
+        <h3 class="site-footer__brand-title font-heading text-h3">
+          {{ section.settings.brand_headline | default: shop.name }}
+        </h3>
+
+        {%- if section.settings.brand_description != blank -%}
+          <p class="site-footer__brand-desc text-small">
+            {{ section.settings.brand_description }}
+          </p>
+        {%- endif -%}
+
+        <!-- Social Media Links (Rendered only if URL provided) -->
+        {%- assign has_social = false -%}
+        {%- if section.settings.social_instagram != blank or section.settings.social_facebook != blank or section.settings.social_tiktok != blank or section.settings.social_youtube != blank or section.settings.social_pinterest != blank -%}
+          {%- assign has_social = true -%}
+        {%- endif -%}
+
+        {%- if has_social -%}
+          <div class="site-footer__socials" aria-label="Social Media Links">
+            {%- if section.settings.social_instagram != blank -%}
+              <a href="{{ section.settings.social_instagram }}" class="site-footer__social-link" target="_blank" rel="noopener" aria-label="Instagram">
+                {% render 'icon', name: 'instagram' %}
+              </a>
+            {%- endif -%}
+
+            {%- if section.settings.social_facebook != blank -%}
+              <a href="{{ section.settings.social_facebook }}" class="site-footer__social-link" target="_blank" rel="noopener" aria-label="Facebook">
+                {% render 'icon', name: 'facebook' %}
+              </a>
+            {%- endif -%}
+
+            {%- if section.settings.social_tiktok != blank -%}
+              <a href="{{ section.settings.social_tiktok }}" class="site-footer__social-link" target="_blank" rel="noopener" aria-label="TikTok">
+                {% render 'icon', name: 'tiktok' %}
+              </a>
+            {%- endif -%}
+
+            {%- if section.settings.social_youtube != blank -%}
+              <a href="{{ section.settings.social_youtube }}" class="site-footer__social-link" target="_blank" rel="noopener" aria-label="YouTube">
+                {% render 'icon', name: 'youtube' %}
+              </a>
+            {%- endif -%}
+
+            {%- if section.settings.social_pinterest != blank -%}
+              <a href="{{ section.settings.social_pinterest }}" class="site-footer__social-link" target="_blank" rel="noopener" aria-label="Pinterest">
+                {% render 'icon', name: 'pinterest' %}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Navigation Menu Columns (Blocks) -->
+      <div class="site-footer__menus-wrapper">
+        {%- for block in section.blocks -%}
+          {%- assign footer_menu = linklists[block.settings.menu] -%}
+
+          <div class="site-footer__menu-col" {{ block.shopify_attributes }}>
+            <!-- Desktop Title -->
+            <h4 class="site-footer__menu-title text-eyebrow desktop-only">
+              {{ block.settings.heading }}
+            </h4>
+
+            <!-- Mobile Collapsible Accordion -->
+            <details class="site-footer__accordion mobile-only">
+              <summary class="site-footer__accordion-summary">
+                <span class="text-eyebrow">{{ block.settings.heading }}</span>
+                {% render 'icon', name: 'chevron-down', class: 'accordion-chevron' %}
+              </summary>
+              <ul class="site-footer__links" role="list">
+                {%- if footer_menu != blank and footer_menu.links.size > 0 -%}
+                  {%- for link in footer_menu.links -%}
+                    <li>
+                      <a href="{{ link.url }}" class="site-footer__link text-small">
+                        {{ link.title }}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                {%- else -%}
+                  {%- case block.settings.heading -%}
+                    {%- when 'SHOP' -%}
+                      <li><a href="{{ routes.collections_url }}/men" class="site-footer__link text-small">Men</a></li>
+                      <li><a href="{{ routes.collections_url }}/women" class="site-footer__link text-small">Women</a></li>
+                      <li><a href="{{ routes.collections_url }}/kids" class="site-footer__link text-small">Kids</a></li>
+                      <li><a href="{{ routes.collections_url }}/footwear" class="site-footer__link text-small">Footwear</a></li>
+                      <li><a href="{{ routes.collections_url }}/accessories" class="site-footer__link text-small">Accessories</a></li>
+                      <li><a href="{{ routes.collections_url }}/beauty" class="site-footer__link text-small">Beauty</a></li>
+                      <li><a href="{{ routes.collections_url }}/sports" class="site-footer__link text-small">Sports</a></li>
+                    {%- when 'CUSTOMER CARE' -%}
+                      <li><a href="{{ routes.root_url }}pages/contact" class="site-footer__link text-small">Contact Us</a></li>
+                      <li><a href="{{ routes.root_url }}pages/delivery" class="site-footer__link text-small">Delivery & Shipping</a></li>
+                      <li><a href="{{ routes.root_url }}pages/returns" class="site-footer__link text-small">Returns & Exchanges</a></li>
+                      <li><a href="{{ routes.root_url }}pages/faqs" class="site-footer__link text-small">FAQs</a></li>
+                      <li><a href="{{ routes.root_url }}pages/size-guide" class="site-footer__link text-small">Size Guide</a></li>
+                    {%- when 'ABOUT' -%}
+                      <li><a href="{{ routes.root_url }}pages/about" class="site-footer__link text-small">About Us</a></li>
+                      <li><a href="{{ routes.root_url }}pages/our-story" class="site-footer__link text-small">Our Story</a></li>
+                      <li><a href="{{ routes.root_url }}blogs/news" class="site-footer__link text-small">The Journal</a></li>
+                    {%- else -%}
+                      <li><a href="{{ routes.root_url }}policies/privacy-policy" class="site-footer__link text-small">Privacy Policy</a></li>
+                      <li><a href="{{ routes.root_url }}policies/terms-of-service" class="site-footer__link text-small">Terms & Conditions</a></li>
+                      <li><a href="{{ routes.root_url }}policies/refund-policy" class="site-footer__link text-small">Cookie Policy</a></li>
+                  {%- endcase -%}
+                {%- endif -%}
+              </ul>
+            </details>
+
+            <!-- Desktop Links List -->
+            <ul class="site-footer__links desktop-only" role="list">
+              {%- if footer_menu != blank and footer_menu.links.size > 0 -%}
+                {%- for link in footer_menu.links -%}
+                  <li>
+                    <a href="{{ link.url }}" class="site-footer__link text-small">
+                      {{ link.title }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              {%- else -%}
+                {%- case block.settings.heading -%}
+                  {%- when 'SHOP' -%}
+                    <li><a href="{{ routes.collections_url }}/men" class="site-footer__link text-small">Men</a></li>
+                    <li><a href="{{ routes.collections_url }}/women" class="site-footer__link text-small">Women</a></li>
+                    <li><a href="{{ routes.collections_url }}/kids" class="site-footer__link text-small">Kids</a></li>
+                    <li><a href="{{ routes.collections_url }}/footwear" class="site-footer__link text-small">Footwear</a></li>
+                    <li><a href="{{ routes.collections_url }}/accessories" class="site-footer__link text-small">Accessories</a></li>
+                    <li><a href="{{ routes.collections_url }}/beauty" class="site-footer__link text-small">Beauty</a></li>
+                    <li><a href="{{ routes.collections_url }}/sports" class="site-footer__link text-small">Sports</a></li>
+                  {%- when 'CUSTOMER CARE' -%}
+                    <li><a href="{{ routes.root_url }}pages/contact" class="site-footer__link text-small">Contact Us</a></li>
+                    <li><a href="{{ routes.root_url }}pages/delivery" class="site-footer__link text-small">Delivery & Shipping</a></li>
+                    <li><a href="{{ routes.root_url }}pages/returns" class="site-footer__link text-small">Returns & Exchanges</a></li>
+                    <li><a href="{{ routes.root_url }}pages/faqs" class="site-footer__link text-small">FAQs</a></li>
+                    <li><a href="{{ routes.root_url }}pages/size-guide" class="site-footer__link text-small">Size Guide</a></li>
+                  {%- when 'ABOUT' -%}
+                    <li><a href="{{ routes.root_url }}pages/about" class="site-footer__link text-small">About Us</a></li>
+                    <li><a href="{{ routes.root_url }}pages/our-story" class="site-footer__link text-small">Our Story</a></li>
+                    <li><a href="{{ routes.root_url }}blogs/news" class="site-footer__link text-small">The Journal</a></li>
+                  {%- else -%}
+                    <li><a href="{{ routes.root_url }}policies/privacy-policy" class="site-footer__link text-small">Privacy Policy</a></li>
+                    <li><a href="{{ routes.root_url }}policies/terms-of-service" class="site-footer__link text-small">Terms & Conditions</a></li>
+                    <li><a href="{{ routes.root_url }}policies/refund-policy" class="site-footer__link text-small">Cookie Policy</a></li>
+                {%- endcase -%}
+              {%- endif -%}
+            </ul>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Middle Footer: Localization & Payment Icons -->
+    <div class="site-footer__middle">
+      <!-- Optional Localization (Only if Shopify provides multiple languages/countries) -->
+      {%- if section.settings.show_localization -%}
+        {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
+          <div class="site-footer__localization">
+            {% form 'localization', id: 'FooterLocalizationForm' %}
+              {%- if localization.available_countries.size > 1 -%}
+                <select name="country_code" class="form-input site-footer__select" aria-label="Select country/currency">
+                  {%- for country in localization.available_countries -%}
+                    <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>
+                      {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                    </option>
+                  {%- endfor -%}
+                </select>
+              {%- endif -%}
+            {% endform %}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+
+      <!-- Payment Icons (Native Shopify Enabled Types) -->
+      {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+        <div class="site-footer__payment" aria-label="Supported Payment Methods">
+          {%- for type in shop.enabled_payment_types -%}
+            <span class="payment-icon-wrapper">
+              {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+            </span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Bottom Footer: Legal & Copyright Bar -->
+    <div class="site-footer__bottom">
+      <div class="site-footer__copyright text-small">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
+        <span class="site-footer__powered">{{ powered_by_link }}</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% stylesheet %}
+  .site-footer {
+    width: 100%;
+    border-top: 1px solid var(--color-border);
+    padding-top: clamp(3rem, 5vw, 5rem);
+    padding-bottom: 2rem;
+  }
+
+  .site-footer__main {
+    display: grid;
+    grid-template-columns: 1.4fr 2.6fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  }
+
+  .site-footer__brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 360px;
+  }
+
+  .site-footer__brand-title {
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .site-footer__brand-desc {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .site-footer__socials {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+
+  .site-footer__social-link {
+    color: var(--color-text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    min-width: 36px;
+    padding: 6px;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .site-footer__social-link:hover {
+    color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .site-footer__menus-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .site-footer__menu-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .site-footer__menu-title {
+    margin: 0;
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .site-footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .site-footer__link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+    display: inline-block;
+  }
+
+  .site-footer__link:hover {
+    color: var(--color-primary);
+    transform: translateX(2px);
+  }
+
+  .desktop-only {
+    display: block;
+  }
+  .mobile-only {
+    display: none;
+  }
+
+  /* Middle Bar: Payments & Localization */
+  .site-footer__middle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .site-footer__payment {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .payment-icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .payment-icon {
+    height: 24px;
+    width: auto;
+  }
+
+  .site-footer__select {
+    min-height: 40px;
+    padding: 6px 12px;
+    font-size: 0.8125rem;
+  }
+
+  /* Bottom Copyright Bar */
+  .site-footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(217, 213, 206, 0.4);
+    color: var(--color-text-muted);
+  }
+
+  .site-footer__copyright {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .site-footer__powered a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .site-footer__powered a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive Mobile Collapse */
+  @media (max-width: 900px) {
+    .site-footer__main {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .site-footer__brand-col {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .desktop-only {
+      display: none !important;
+    }
+    .mobile-only {
+      display: block !important;
+    }
+
+    .site-footer__menus-wrapper {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .site-footer__menu-col {
+      border-bottom: 1px solid var(--color-border);
+      gap: 0;
+    }
+
+    .site-footer__accordion-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+
+    .site-footer__accordion-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .site-footer__accordion[open] .accordion-chevron {
+      transform: rotate(180deg);
+    }
+
+    .site-footer__accordion .site-footer__links {
+      padding-bottom: 1.25rem;
+    }
+
+    .site-footer__middle {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand Column"
+    },
+    {
+      "type": "text",
+      "id": "brand_headline",
+      "label": "Brand headline",
+      "default": "METICULOUS"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_description",
+      "label": "Brand description",
+      "default": "Modern, refined fashion crafted with architectural precision and enduring quality."
+    },
+    {
+      "type": "header",
+      "content": "Social Media Links"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "social_facebook",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "social_tiktok",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "social_youtube",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "url",
+      "id": "social_pinterest",
+      "label": "Pinterest URL"
+    },
+    {
+      "type": "header",
+      "content": "Settings & Appearance"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_localization",
+      "label": "Show currency/country selector",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "bg_color",
+      "label": "Background color",
+      "options": [
+        { "value": "warm_ivory", "label": "Warm Ivory" },
+        { "value": "soft_beige", "label": "Soft Beige" },
+        { "value": "dark", "label": "Charcoal Black" }
+      ],
+      "default": "soft_beige"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Menu Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "SHOP"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "link_list",
+        "settings": {
+          "heading": "SHOP"
+        }
+      },
+      {
+        "type": "link_list",
+        "settings": {
+          "heading": "CUSTOMER CARE"
+        }
+      },
+      {
+        "type": "link_list",
+        "settings": {
+          "heading": "ABOUT"
+        }
+      },
+      {
+        "type": "link_list",
+        "settings": {
+          "heading": "LEGAL"
+        }
+      }
+    ]
+  }
+}
+{% endschema %}

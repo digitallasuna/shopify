@@ -1,0 +1,282 @@
+{% comment %}
+  Meticulous Fashion - Product Template Section
+  Renders product media gallery, product details, variant selection,
+  native add-to-cart form, sold out handling, and dynamic checkout buttons.
+{% endcomment %}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<div class="product-page page-container section-spacing--medium" id="ProductSection-{{ section.id }}">
+  <div class="product-layout">
+    <!-- Product Media Gallery -->
+    <div class="product-gallery">
+      {%- if product.media.size > 0 -%}
+        <div class="product-gallery__list">
+          {%- for media in product.media -%}
+            <div class="product-gallery__item">
+              {%- if forloop.first -%}
+                {%- assign img_loading = 'eager' -%}
+              {%- else -%}
+                {%- assign img_loading = 'lazy' -%}
+              {%- endif -%}
+              {{
+                media
+                | image_url: width: 1200
+                | image_tag:
+                  class: 'product-gallery__image',
+                  widths: '400, 600, 800, 1000, 1200',
+                  sizes: '(max-width: 768px) 100vw, 55vw',
+                  loading: img_loading,
+                  alt: media.alt | default: product.title | escape
+              }}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- elsif product.featured_image != blank -%}
+        <div class="product-gallery__item">
+          {{
+            product.featured_image
+            | image_url: width: 1200
+            | image_tag:
+              class: 'product-gallery__image',
+              widths: '400, 600, 800, 1000, 1200',
+              sizes: '(max-width: 768px) 100vw, 55vw',
+              loading: 'eager',
+              alt: product.featured_image.alt | default: product.title | escape
+          }}
+        </div>
+      {%- else -%}
+        <div class="product-gallery__placeholder">
+          {{ 'product-1' | placeholder_svg_tag: 'product-gallery__placeholder-svg' }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Product Information & Purchase Form -->
+    <div class="product-info-wrapper">
+      <div class="product-info">
+        {%- if product.vendor != blank -%}
+          <span class="product-vendor text-caption text-muted">{{ product.vendor }}</span>
+        {%- endif -%}
+
+        <h1 class="product-title font-heading text-h2">{{ product.title }}</h1>
+
+        <!-- Product Price -->
+        <div class="product-price-wrapper">
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            <span class="product-price product-price--sale text-h3">{{ current_variant.price | money }}</span>
+            <span class="product-price product-price--compare text-lead text-muted">{{ current_variant.compare_at_price | money }}</span>
+            <span class="badge badge--sale">Sale</span>
+          {%- else -%}
+            <span class="product-price text-h3">{{ current_variant.price | money }}</span>
+          {%- endif -%}
+        </div>
+
+        <!-- Product Purchase Form -->
+        {% form 'product', product, id: 'AddToCartForm', class: 'product-form' %}
+          <!-- Variant Selector (if more than 1 variant) -->
+          {%- if product.variants.size > 1 -%}
+            <div class="form-group product-form__variants">
+              <label for="ProductSelect-{{ section.id }}" class="form-label text-eyebrow">
+                Select Option
+              </label>
+              <select
+                name="id"
+                id="ProductSelect-{{ section.id }}"
+                class="form-select"
+              >
+                {%- for variant in product.variants -%}
+                  <option
+                    value="{{ variant.id }}"
+                    {% if variant == current_variant %}selected="selected"{% endif %}
+                    {% unless variant.available %}disabled="disabled"{% endunless %}
+                  >
+                    {{ variant.title }} - {{ variant.price | money }}
+                    {%- unless variant.available %} (Sold Out){% endunless -%}
+                  </option>
+                {%- endfor -%}
+              </select>
+            </div>
+          {%- else -%}
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+          {%- endif -%}
+
+          <!-- Quantity Selector -->
+          <div class="form-group product-form__quantity">
+            <label for="Quantity-{{ section.id }}" class="form-label text-eyebrow">
+              Quantity
+            </label>
+            <input
+              type="number"
+              id="Quantity-{{ section.id }}"
+              name="quantity"
+              min="1"
+              value="1"
+              class="form-input product-quantity__input"
+            >
+          </div>
+
+          <!-- Add to Cart / Sold Out Button -->
+          <div class="product-form__actions">
+            <button
+              type="submit"
+              name="add"
+              id="AddToCart-{{ section.id }}"
+              class="btn btn--primary btn--full"
+              {% unless current_variant.available %}disabled="disabled"{% endunless %}
+            >
+              <span>
+                {%- if current_variant.available -%}
+                  Add to Bag
+                {%- else -%}
+                  Sold Out
+                {%- endif -%}
+              </span>
+            </button>
+
+            {%- if current_variant.available -%}
+              <div class="product-dynamic-checkout">
+                {{ form | payment_button }}
+              </div>
+            {%- endif -%}
+          </div>
+        {% endform %}
+
+        <!-- Product Description -->
+        {%- if product.description != blank -%}
+          <div class="product-description rte">
+            <h2 class="product-description__title text-eyebrow">Details & Fit</h2>
+            <div class="product-description__content text-body">
+              {{ product.description }}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .product-layout {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--space-10, 3.5rem);
+    align-items: start;
+  }
+
+  .product-gallery__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4, 1rem);
+  }
+
+  .product-gallery__item {
+    background-color: var(--color-background-secondary);
+    overflow: hidden;
+  }
+
+  .product-gallery__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .product-gallery__placeholder {
+    background-color: var(--color-background-secondary);
+    padding: var(--space-12, 4rem);
+    display: flex;
+    justify-content: center;
+  }
+
+  .product-gallery__placeholder-svg {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+
+  .product-info-wrapper {
+    position: sticky;
+    top: calc(var(--header-height, 80px) + var(--space-4, 1rem));
+  }
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4, 1rem);
+  }
+
+  .product-vendor {
+    letter-spacing: var(--letter-spacing-loose);
+    text-transform: uppercase;
+  }
+
+  .product-price-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3, 0.75rem);
+    margin-bottom: var(--space-2, 0.5rem);
+  }
+
+  .product-price--sale {
+    color: var(--color-burgundy);
+  }
+
+  .product-price--compare {
+    text-decoration: line-through;
+  }
+
+  .product-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4, 1rem);
+    padding-top: var(--space-4, 1rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .product-quantity__input {
+    max-width: 100px;
+  }
+
+  .product-form__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3, 0.75rem);
+    margin-top: var(--space-2, 0.5rem);
+  }
+
+  .product-dynamic-checkout {
+    width: 100%;
+  }
+
+  .product-description {
+    margin-top: var(--space-6, 1.5rem);
+    padding-top: var(--space-6, 1.5rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .product-description__title {
+    margin-bottom: var(--space-3, 0.75rem);
+  }
+
+  @media (max-width: 860px) {
+    .product-layout {
+      grid-template-columns: 1fr;
+      gap: var(--space-6, 1.5rem);
+    }
+
+    .product-info-wrapper {
+      position: static;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product Page",
+  "settings": [],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

@@ -1,0 +1,383 @@
+{% comment %}
+  Meticulous Fashion - Featured Categories Section
+  Visual department navigation grid with configurable blocks, responsive columns,
+  image hover effects, and Theme Editor controls.
+{% endcomment %}
+
+{%- liquid
+  assign columns_desktop = section.settings.columns_desktop | default: 4
+  assign aspect_ratio = section.settings.media_aspect_ratio | default: 'portrait'
+-%}
+
+<section
+  id="FeaturedCategories-{{ section.id }}"
+  class="featured-categories section-spacing--{{ section.settings.section_spacing | default: 'medium' }}"
+  role="region"
+  aria-label="{{ section.settings.heading | default: 'Featured Categories' | escape }}"
+>
+  <div class="page-container">
+    {%- if section.settings.heading != blank or section.settings.eyebrow != blank -%}
+      <div class="section-header">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="text-eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="section-header__title text-h2 font-heading">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <p class="section-header__description text-lead">
+            {{ section.settings.description }}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div
+      class="featured-categories__grid grid--cols-{{ columns_desktop }} aspect--{{ aspect_ratio }}"
+      role="list"
+    >
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign overlay_alpha = block.settings.overlay_opacity | default: 15 | divided_by: 100.0
+          assign category_link = block.settings.link | default: routes.all_products_collection_url
+          assign category_title = block.settings.title | default: 'Department'
+        -%}
+
+        <div
+          class="category-card"
+          style="--card-overlay: rgba(0, 0, 0, {{ overlay_alpha }});"
+          role="listitem"
+          {{ block.shopify_attributes }}
+        >
+          <a
+            href="{{ category_link }}"
+            class="category-card__link"
+            aria-label="{{ category_title | escape }}"
+          >
+            <!-- Media Container -->
+            <div class="category-card__media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 1000
+                  | image_tag:
+                    class: 'category-card__image',
+                    widths: '300, 450, 600, 800, 1000',
+                    sizes: '(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw',
+                    loading: 'lazy',
+                    alt: block.settings.image.alt | default: category_title | escape
+                }}
+              {%- else -%}
+                <!-- Editorial Placeholder Card for Development/Theme Editor -->
+                <div class="category-card__placeholder">
+                  {%- assign placeholder_index = forloop.index | modulo: 6 | plus: 1 -%}
+                  {%- assign placeholder_name = 'collection-' | append: placeholder_index -%}
+                  {{ placeholder_name | placeholder_svg_tag: 'category-card__placeholder-svg' }}
+                </div>
+              {%- endif -%}
+
+              <!-- Overlay Tint for Legibility -->
+              <div class="category-card__overlay"></div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="category-card__content">
+              <span class="category-card__title text-nav">
+                <span>{{ category_title }}</span>
+                {% render 'icon', name: 'chevron-right', class: 'category-card__arrow' %}
+              </span>
+
+              {%- if block.settings.description != blank -%}
+                <p class="category-card__desc text-small">
+                  {{ block.settings.description }}
+                </p>
+              {%- endif -%}
+            </div>
+          </a>
+        </div>
+      {%- else -%}
+        <!-- Fallback Onboarding State if no blocks exist yet -->
+        {%- for i in (1..4) -%}
+          <div class="category-card" role="listitem">
+            <div class="category-card__link">
+              <div class="category-card__media">
+                <div class="category-card__placeholder">
+                  {{ 'collection-1' | placeholder_svg_tag: 'category-card__placeholder-svg' }}
+                </div>
+              </div>
+              <div class="category-card__content">
+                <span class="category-card__title text-nav">Department {{ i }}</span>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .featured-categories {
+    width: 100%;
+    background-color: var(--color-background);
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 640px;
+    margin-inline: auto;
+    margin-bottom: clamp(2rem, 3.5vw, 3.5rem);
+  }
+
+  .section-header__title {
+    margin-bottom: 0.5rem;
+  }
+
+  .section-header__description {
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  /* Grid Layouts */
+  .featured-categories__grid {
+    display: grid;
+    gap: var(--grid-gap-desktop);
+  }
+
+  .grid--cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid--cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid--cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .grid--cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+  @media (max-width: 1100px) {
+    .grid--cols-4,
+    .grid--cols-5 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .featured-categories__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--grid-gap-mobile);
+    }
+  }
+
+  /* Aspect Ratios */
+  .aspect--portrait .category-card__media { aspect-ratio: 3 / 4; }
+  .aspect--square .category-card__media { aspect-ratio: 1 / 1; }
+
+  /* Card Component */
+  .category-card {
+    position: relative;
+    border-radius: var(--card-radius);
+    overflow: hidden;
+  }
+
+  .category-card__link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: var(--color-text);
+    position: relative;
+  }
+
+  .category-card__media {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--card-radius);
+  }
+
+  .category-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform var(--transition-slow);
+  }
+
+  .category-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface);
+  }
+
+  .category-card__placeholder-svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.35;
+  }
+
+  .category-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--card-overlay);
+    transition: background-color var(--transition-normal);
+  }
+
+  @media (hover: hover) {
+    .category-card:hover .category-card__image {
+      transform: scale(1.04);
+    }
+    .category-card:hover .category-card__overlay {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    .category-card:hover .category-card__arrow {
+      transform: translateX(4px);
+      color: var(--color-accent);
+    }
+    .category-card:hover .category-card__title {
+      color: var(--color-accent);
+    }
+  }
+
+  /* Content Details */
+  .category-card__content {
+    padding-block: 0.875rem 0.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .category-card__title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: color var(--transition-fast);
+  }
+
+  .category-card__arrow {
+    transition: transform var(--transition-fast), color var(--transition-fast);
+  }
+
+  .category-card__desc {
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    margin: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Featured Categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "DEPARTMENTS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "SHOP BY CATEGORY"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Explore curated collections crafted for the modern wardrobe."
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "media_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        { "value": "portrait", "label": "Portrait (3:4)" },
+        { "value": "square", "label": "Square (1:1)" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "select",
+      "id": "section_spacing",
+      "label": "Section spacing",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category title",
+          "default": "Department"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Tagline / Subtitle"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Category link"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "min": 0,
+          "max": 60,
+          "step": 5,
+          "unit": "%",
+          "label": "Overlay tint",
+          "default": 10
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Categories",
+      "blocks": [
+        { "type": "category", "settings": { "title": "MEN" } },
+        { "type": "category", "settings": { "title": "WOMEN" } },
+        { "type": "category", "settings": { "title": "KIDS" } },
+        { "type": "category", "settings": { "title": "FOOTWEAR" } },
+        { "type": "category", "settings": { "title": "ACCESSORIES" } },
+        { "type": "category", "settings": { "title": "BEAUTY" } },
+        { "type": "category", "settings": { "title": "SPORTS" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

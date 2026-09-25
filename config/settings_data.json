@@ -1,0 +1,26 @@
+{
+  "current": {
+    "color_primary": "#111111",
+    "color_background": "#F8F6F2",
+    "color_surface": "#EFECE6",
+    "color_accent": "#6F1D2A",
+    "color_text": "#171717",
+    "color_text_muted": "#6B6B6B",
+    "color_border": "#D9D5CE",
+    "color_white": "#FFFFFF",
+    "background_color": "#F8F6F2",
+    "foreground_color": "#171717",
+    "type_heading_font": "garamond_n4",
+    "heading_scale": 100,
+    "type_primary_font": "work_sans_n4",
+    "body_scale": 100,
+    "max_page_width": "100rem",
+    "min_page_margin": 24,
+    "section_spacing_desktop": 80,
+    "section_spacing_mobile": 48,
+    "grid_gap_desktop": 24,
+    "grid_gap_mobile": 16,
+    "button_corner_radius": 0,
+    "input_corner_radius": 2
+  }
+}

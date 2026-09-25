@@ -1,0 +1,273 @@
+{% comment %}
+  Meticulous Fashion - Cart Template Section
+  Renders responsive shopping bag with item updates, item removal,
+  subtotal summary, empty state, and native checkout button.
+{% endcomment %}
+
+<div class="cart-page page-container section-spacing--medium">
+  {%- if cart.item_count == 0 -%}
+    <!-- Empty Cart State -->
+    <div class="cart-empty text-center">
+      <h1 class="cart-title font-heading text-h2">{{ 'cart.title' | t }}</h1>
+      <p class="cart-empty__message text-lead text-muted">Your shopping bag is currently empty.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">
+        Discover New Arrivals
+      </a>
+    </div>
+  {%- else -%}
+    <!-- Populated Cart Form -->
+    <header class="cart-header">
+      <h1 class="cart-title font-heading text-h2">{{ 'cart.title' | t }} ({{ cart.item_count }})</h1>
+    </header>
+
+    <form action="{{ routes.cart_url }}" method="post" class="cart-form">
+      <div class="cart-layout">
+        <!-- Cart Items List -->
+        <div class="cart-items">
+          <div class="cart-items__header cart-desktop-only">
+            <span class="text-eyebrow">Product</span>
+            <span class="text-eyebrow text-center">Quantity</span>
+            <span class="text-eyebrow text-right">Total</span>
+          </div>
+
+          {%- for item in cart.items -%}
+            <div class="cart-item">
+              <!-- Item Media -->
+              <div class="cart-item__media">
+                {%- if item.image -%}
+                  <a href="{{ item.url }}" tabindex="-1">
+                    {{
+                      item.image
+                      | image_url: width: 300
+                      | image_tag:
+                        class: 'cart-item__image',
+                        widths: '120, 200, 300',
+                        loading: 'lazy',
+                        alt: item.title | escape
+                    }}
+                  </a>
+                {%- endif -%}
+              </div>
+
+              <!-- Item Details -->
+              <div class="cart-item__details">
+                <h2 class="cart-item__title text-body">
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                </h2>
+
+                {%- unless item.product.has_only_default_variant -%}
+                  <p class="cart-item__variant text-small text-muted">{{ item.variant.title }}</p>
+                {%- endunless -%}
+
+                <p class="cart-item__price text-small">{{ item.original_price | money }}</p>
+
+                <!-- Mobile Quantity & Remove -->
+                <div class="cart-item__mobile-actions cart-mobile-only">
+                  <label for="MobileUpdates-{{ item.key }}" class="visually-hidden">Quantity</label>
+                  <input
+                    type="number"
+                    name="updates[]"
+                    id="MobileUpdates-{{ item.key }}"
+                    value="{{ item.quantity }}"
+                    min="0"
+                    class="form-input cart-qty__input"
+                  >
+                  <a href="{{ item.url_to_remove }}" class="cart-remove text-small text-muted" aria-label="Remove {{ item.title | escape }}">
+                    Remove
+                  </a>
+                </div>
+              </div>
+
+              <!-- Desktop Quantity -->
+              <div class="cart-item__quantity cart-desktop-only">
+                <label for="Updates-{{ item.key }}" class="visually-hidden">Quantity</label>
+                <input
+                  type="number"
+                  name="updates[]"
+                  id="Updates-{{ item.key }}"
+                  value="{{ item.quantity }}"
+                  min="0"
+                  class="form-input cart-qty__input"
+                >
+                <a href="{{ item.url_to_remove }}" class="cart-remove text-small text-muted" aria-label="Remove {{ item.title | escape }}">
+                  Remove
+                </a>
+              </div>
+
+              <!-- Item Total -->
+              <div class="cart-item__total text-right">
+                <span class="cart-item__line-price font-heading">{{ item.final_line_price | money }}</span>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <!-- Cart Summary / Checkout Sidebar -->
+        <aside class="cart-summary">
+          <div class="cart-summary__box bg-soft-beige">
+            <h2 class="cart-summary__title font-heading text-h3">Order Summary</h2>
+
+            <div class="cart-summary__row">
+              <span class="text-body">Subtotal</span>
+              <span class="font-heading text-h3">{{ cart.total_price | money_with_currency }}</span>
+            </div>
+
+            <p class="cart-summary__shipping-note text-small text-muted">
+              Taxes and shipping calculated at checkout.
+            </p>
+
+            <div class="cart-summary__actions">
+              <button type="submit" name="update" class="btn btn--secondary btn--full">
+                {{ 'cart.update' | t }}
+              </button>
+
+              <button type="submit" name="checkout" class="btn btn--primary btn--full">
+                {{ 'cart.checkout' | t }}
+              </button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </form>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .cart-empty {
+    padding: var(--space-16, 6rem) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4, 1rem);
+  }
+
+  .cart-header {
+    margin-bottom: var(--space-8, 3rem);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--space-4, 1rem);
+  }
+
+  .cart-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: var(--space-10, 3.5rem);
+    align-items: start;
+  }
+
+  .cart-items__header {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr;
+    padding-bottom: var(--space-3, 0.75rem);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-4, 1rem);
+  }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 100px 1.8fr 1fr 1fr;
+    gap: var(--space-4, 1rem);
+    align-items: center;
+    padding: var(--space-4, 1rem) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cart-item__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    background-color: var(--color-background-secondary);
+  }
+
+  .cart-item__title a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .cart-item__title a:hover {
+    text-decoration: underline;
+  }
+
+  .cart-item__quantity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2, 0.5rem);
+  }
+
+  .cart-qty__input {
+    width: 70px;
+    text-align: center;
+    padding: var(--space-2, 0.5rem);
+  }
+
+  .cart-remove {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .cart-summary__box {
+    padding: var(--space-6, 1.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4, 1rem);
+  }
+
+  .cart-summary__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: var(--space-2, 0.5rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .cart-summary__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3, 0.75rem);
+    margin-top: var(--space-2, 0.5rem);
+  }
+
+  .cart-mobile-only {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    .cart-layout {
+      grid-template-columns: 1fr;
+      gap: var(--space-8, 2.5rem);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .cart-desktop-only {
+      display: none !important;
+    }
+
+    .cart-mobile-only {
+      display: flex !important;
+    }
+
+    .cart-item {
+      grid-template-columns: 80px 1fr auto;
+      gap: var(--space-3, 0.75rem);
+    }
+
+    .cart-item__mobile-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3, 0.75rem);
+      margin-top: var(--space-2, 0.5rem);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cart Page",
+  "settings": [],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

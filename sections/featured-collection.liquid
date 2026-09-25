@@ -1,0 +1,267 @@
+{% comment %}
+  Meticulous Fashion - Featured Collection Section
+  Renders products from a real Shopify collection using the reusable product-card snippet.
+  Supports Theme Editor onboarding, empty states, and responsive grids.
+{% endcomment %}
+
+{%- liquid
+  assign selected_collection = section.settings.collection
+  assign products_limit = section.settings.products_to_show | default: 8
+  assign columns_desktop = section.settings.columns_desktop | default: 4
+  assign columns_mobile = section.settings.columns_mobile | default: '2'
+-%}
+
+<section
+  id="FeaturedCollection-{{ section.id }}"
+  class="featured-collection section-spacing--{{ section.settings.section_spacing | default: 'medium' }}"
+  role="region"
+  aria-label="{{ section.settings.heading | default: 'Featured Collection' | escape }}"
+>
+  <div class="page-container">
+    <!-- Section Header -->
+    {%- if section.settings.heading != blank or section.settings.eyebrow != blank -%}
+      <div class="section-header">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="text-eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="section-header__title text-h2 font-heading">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <p class="section-header__description text-lead">
+            {{ section.settings.description }}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Product Grid -->
+    <div
+      class="featured-collection__grid grid--desktop-{{ columns_desktop }} grid--mobile-{{ columns_mobile }}"
+      role="list"
+    >
+      {%- if selected_collection != blank -%}
+        {%- if selected_collection.products.size > 0 -%}
+          {%- for product in selected_collection.products limit: products_limit -%}
+            <div class="featured-collection__item" role="listitem">
+              {% render 'product-card',
+                product: product,
+                media_aspect_ratio: 'portrait',
+                show_vendor: section.settings.show_vendor,
+                show_quick_add: section.settings.show_quick_add,
+                lazy_load: true
+              %}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Selected Collection has 0 Products -->
+          <div class="featured-collection__empty full-width">
+            <p class="text-lead">No products currently available in this collection.</p>
+            <a href="{{ routes.all_products_collection_url }}" class="btn btn--secondary btn--small">
+              Explore All Products
+            </a>
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        <!-- Theme Editor Onboarding State (No collection selected yet) -->
+        {%- for i in (1..products_limit) -%}
+          <div class="featured-collection__item" role="listitem">
+            {% render 'product-card',
+              product: null,
+              media_aspect_ratio: 'portrait',
+              show_vendor: section.settings.show_vendor,
+              show_quick_add: section.settings.show_quick_add,
+              lazy_load: true
+            %}
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    <!-- View All Button -->
+    {%- if section.settings.show_view_all and selected_collection != blank and selected_collection.products.size > 0 -%}
+      <div class="featured-collection__footer">
+        <a
+          href="{{ selected_collection.url }}"
+          class="btn btn--secondary featured-collection__view-all"
+        >
+          {{ section.settings.view_all_text | default: 'View All' }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .featured-collection {
+    width: 100%;
+    background-color: var(--color-background);
+  }
+
+  .featured-collection .section-header {
+    text-align: center;
+    max-width: 640px;
+    margin-inline: auto;
+    margin-bottom: clamp(2rem, 3.5vw, 3.5rem);
+  }
+
+  .featured-collection .section-header__title {
+    margin-bottom: 0.5rem;
+  }
+
+  .featured-collection .section-header__description {
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .featured-collection__grid {
+    display: grid;
+    gap: var(--grid-gap-desktop);
+  }
+
+  /* Desktop Grid Columns */
+  .grid--desktop-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid--desktop-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid--desktop-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .grid--desktop-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+  @media (max-width: 1100px) {
+    .grid--desktop-4,
+    .grid--desktop-5 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /* Mobile Grid Columns */
+  @media (max-width: 768px) {
+    .featured-collection__grid {
+      gap: var(--grid-gap-mobile);
+    }
+    .grid--mobile-1 { grid-template-columns: 1fr; }
+    .grid--mobile-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  .featured-collection__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .featured-collection__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(2.5rem, 4vw, 4rem);
+  }
+
+  .featured-collection__view-all {
+    min-width: 200px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "CURATED SELECTION"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "NEW ARRIVALS"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 16,
+      "step": 2,
+      "label": "Products to show",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1 column" },
+        { "value": "2", "label": "2 columns" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "label": "Show Quick Add button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View All' button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View All button text",
+      "default": "View All Products"
+    },
+    {
+      "type": "select",
+      "id": "section_spacing",
+      "label": "Section spacing",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1250 @@
+{% comment %}
+  Meticulous Fashion - Editorial OS 2.0 Header
+  Includes desktop mega-menu navigation, mobile drawer, predictive search trigger, and sticky header.
+{% endcomment %}
+
+{%- assign main_menu = linklists[section.settings.menu] | default: linklists['main-menu'] -%}
+
+{%- assign has_nested_links = false -%}
+{%- if main_menu != blank and main_menu.links.size > 0 -%}
+  {%- for link in main_menu.links -%}
+    {%- if link.links.size > 0 -%}
+      {%- assign has_nested_links = true -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if section.settings.use_editorial_sample_nav and has_nested_links == false -%}
+  {%- assign render_editorial_nav = true -%}
+{%- else -%}
+  {%- assign render_editorial_nav = false -%}
+{%- endif -%}
+
+<header
+  class="site-header{% if section.settings.enable_sticky_header %} site-header--sticky{% endif %}{% if section.settings.show_separator_line %} site-header--bordered{% endif %} header-padding--{{ section.settings.header_padding | default: 'medium' }}"
+  data-sticky-header="{{ section.settings.enable_sticky_header }}"
+  role="banner"
+>
+  <div class="site-header__container full-width">
+    <!-- Left: Mobile Menu Toggle & Logo -->
+    <div class="site-header__left">
+      <button
+        type="button"
+        class="site-header__mobile-toggle btn"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="MobileMenuDrawer"
+        data-drawer-open
+      >
+        {% render 'icon', name: 'menu', class: 'icon-menu' %}
+        <span class="visually-hidden">Open Menu</span>
+      </button>
+
+      <div class="site-header__logo-wrapper">
+        <a href="{{ routes.root_url }}" class="site-header__logo-link">
+          {%- if section.settings.logo != blank -%}
+            {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+            {%- capture logo_style -%}max-width: {{ section.settings.logo_width }}px;{%- endcapture -%}
+            {{
+              section.settings.logo
+              | image_url: width: 400
+              | image_tag:
+                class: 'site-header__logo-img',
+                widths: '120, 160, 200, 260, 320',
+                style: logo_style,
+                alt: logo_alt
+            }}
+          {%- else -%}
+            <span class="site-header__logo-text font-heading">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+    </div>
+
+    <!-- Center: Desktop Navigation & Mega Menus -->
+    <nav class="site-header__nav" role="navigation" aria-label="Main Navigation">
+      <ul class="nav-list" role="list">
+        {%- if render_editorial_nav -%}
+          {% comment %}
+            Editorial 7-Department Fashion Navigation & Mega Menus
+          {% endcomment %}
+
+          <!-- 1. MEN -->
+          <li class="nav-item nav-item--has-mega" data-nav-item>
+            <a href="{{ routes.collections_url }}/men" class="nav-link text-nav" aria-expanded="false">
+              <span>MEN</span>
+              {% render 'icon', name: 'chevron-down', class: 'nav-link__chevron' %}
+            </a>
+            <div class="mega-menu" role="region" aria-label="Men Collection Menu">
+              <div class="mega-menu__container">
+                <div class="mega-menu__column">
+                  <h3 class="mega-menu__title text-eyebrow">Clothing</h3>
+                  <ul class="mega-menu__list" role="list">
+                    <li><a href="{{ routes.collections_url }}/men-jeans" class="mega-menu__link">Jeans</a></li>
+                    <li><a href="{{ routes.collections_url }}/men-shirts" class="mega-menu__link">Shirts</a></li>
+                    <li><a href="{{ routes.collections_url }}/men-sweaters" class="mega-menu__link">Sweaters</a></li>
+                    <li><a href="{{ routes.collections_url }}/men-hoodies" class="mega-menu__link">Hoodies</a></li>
+                    <li><a href="{{ routes.collections_url }}/men-coats-jackets" class="mega-menu__link">Coats & Jackets</a></li>
+                  </ul>
+                </div>
+                <div class="mega-menu__column">
+                  <h3 class="mega-menu__title text-eyebrow">Footwear & More</h3>
+                  <ul class="mega-menu__list" role="list">
+                    <li><a href="{{ routes.collections_url }}/footwear-men" class="mega-menu__link">Men's Shoes & Boots</a></li>
+                    <li><a href="{{ routes.collections_url }}/men-accessories" class="mega-menu__link">Belts & Wallets</a></li>
+                    <li><a href="{{ routes.collections_url }}/men-new" class="mega-menu__link mega-menu__link--accent">New In Men</a></li>
+                  </ul>
+                </div>
+                <div class="mega-menu__column mega-menu__column--editorial">
+                  <div class="mega-menu__card">
+                    <span class="text-eyebrow">Editorial Pick</span>
+                    <h4 class="mega-menu__card-title">Tailored Autumn Outerwear</h4>
+                    <p class="mega-menu__card-desc">Structured wool-blend overcoats designed for contemporary city life.</p>
+                    <a href="{{ routes.collections_url }}/men-coats-jackets" class="btn btn--small btn--primary">Explore Coats</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- 2. WOMEN -->
+          <li class="nav-item nav-item--has-mega" data-nav-item>
+            <a href="{{ routes.collections_url }}/women" class="nav-link text-nav" aria-expanded="false">
+              <span>WOMEN</span>
+              {% render 'icon', name: 'chevron-down', class: 'nav-link__chevron' %}
+            </a>
+            <div class="mega-menu" role="region" aria-label="Women Collection Menu">
+              <div class="mega-menu__container">
+                <div class="mega-menu__column">
+                  <h3 class="mega-menu__title text-eyebrow">Clothing</h3>
+                  <ul class="mega-menu__list" role="list">
+                    <li><a href="{{ routes.collections_url }}/women-dresses" class="mega-menu__link">Dresses</a></li>
+                    <li><a href="{{ routes.collections_url }}/women-suits-tailoring" class="mega-menu__link">Suits & Tailoring</a></li>
+                    <li><a href="{{ routes.collections_url }}/women-sweaters" class="mega-menu__link">Sweaters</a></li>
+                    <li><a href="{{ routes.collections_url }}/women-jeans" class="mega-menu__link">Jeans</a></li>
+                    <li><a href="{{ routes.collections_url }}/women-coats-jackets" class="mega-menu__link">Coats & Jackets</a></li>
+                    <li><a href="{{ routes.collections_url }}/women-sleepwear" class="mega-menu__link">Sleepwear</a></li>
+                  </ul>
+                </div>
+                <div class="mega-menu__column">
+                  <h3 class="mega-menu__title text-eyebrow">Curations</h3>
+                  <ul class="mega-menu__list" role="list">
+                    <li><a href="{{ routes.collections_url }}/footwear-women" class="mega-menu__link">Women's Footwear</a></li>
+                    <li><a href="{{ routes.collections_url }}/jewellery" class="mega-menu__link">Fine Jewellery</a></li>
+                    <li><a href="{{ routes.collections_url }}/women-new" class="mega-menu__link mega-menu__link--accent">New In Women</a></li>
+                  </ul>
+                </div>
+                <div class="mega-menu__column mega-menu__column--editorial">
+                  <div class="mega-menu__card">
+                    <span class="text-eyebrow">Lookbook</span>
+                    <h4 class="mega-menu__card-title">Architectural Silhouettes</h4>
+                    <p class="mega-menu__card-desc">Understated luxury cut from premium European mills.</p>
+                    <a href="{{ routes.collections_url }}/women-dresses" class="btn btn--small btn--primary">View Lookbook</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- 3. KIDS -->
+          <li class="nav-item nav-item--has-mega" data-nav-item>
+            <a href="{{ routes.collections_url }}/kids" class="nav-link text-nav" aria-expanded="false">
+              <span>KIDS</span>
+              {% render 'icon', name: 'chevron-down', class: 'nav-link__chevron' %}
+            </a>
+            <div class="mega-menu" role="region" aria-label="Kids Collection Menu">
+              <div class="mega-menu__container">
+                <div class="mega-menu__column">
+                  <h3 class="mega-menu__title text-eyebrow">Categories</h3>
+                  <ul class="mega-menu__list" role="list">
+                    <li><a href="{{ routes.collections_url }}/kids-dresses" class="mega-menu__link">Dresses</a></li>
+                    <li><a href="{{ routes.collections_url }}/kids-jeans" class="mega-menu__link">Jeans</a></li>
+                    <li><a href="{{ routes.collections_url }}/kids-shirts" class="mega-menu__link">Shirts</a></li>
+                    <li><a href="{{ routes.collections_url }}/kids-sweaters" class="mega-menu__link">Sweaters</a></li>
+                    <li><a href="{{ routes.collections_url }}/kids-coats-jackets" class="mega-menu__link">Coats & Jackets</a></li>
+                  </ul>
+                </div>
+                <div class="mega-menu__column">
+                  <h3 class="mega-menu__title text-eyebrow">Essentials</h3>
+                  <ul class="mega-menu__list" role="list">
+                    <li><a href="{{ routes.collections_url }}/footwear-kids" class="mega-menu__link">Kids' Footwear</a></li>
+                    <li><a href="{{ routes.collections_url }}/kids-new" class="mega-menu__link mega-menu__link--accent">New Arrivals</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- 4. FOOTWEAR -->
+          <li class="nav-item nav-item--has-mega" data-nav-item>
+            <a href="{{ routes.collections_url }}/footwear" class="nav-link text-nav" aria-expanded="false">
+              <span>FOOTWEAR</span>
+              {% render 'icon', name: 'chevron-down', class: 'nav-link__chevron' %}
+            </a>
+            <div class="mega-menu" role="region" aria-label="Footwear Menu">
+              <div class="mega-menu__container">
+                <div class="mega-menu__column">
+                  <h3 class="mega-menu__title text-eyebrow">Departments</h3>
+                  <ul class="mega-menu__list" role="list">
+                    <li><a href="{{ routes.collections_url }}/footwear-men" class="mega-menu__link">Men's Shoes & Boots</a></li>
+                    <li><a href="{{ routes.collections_url }}/footwear-women" class="mega-menu__link">Women's Heels, Loafers & Boots</a></li>
+                    <li><a href="{{ routes.collections_url }}/footwear-kids" class="mega-menu__link">Kids' Shoes & Trainers</a></li>
+                  </ul>
+                </div>
+                <div class="mega-menu__column">
+                  <h3 class="mega-menu__title text-eyebrow">Highlights</h3>
+                  <ul class="mega-menu__list" role="list">
+                    <li><a href="{{ routes.collections_url }}/footwear-leather" class="mega-menu__link">Crafted Leather</a></li>
+                    <li><a href="{{ routes.collections_url }}/footwear-trainers" class="mega-menu__link">Minimalist Trainers</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- 5. ACCESSORIES -->
+          <li class="nav-item nav-item--has-mega" data-nav-item>
+            <a href="{{ routes.collections_url }}/accessories" class="nav-link text-nav" aria-expanded="false">
+              <span>ACCESSORIES</span>
+              {% render 'icon', name: 'chevron-down', class: 'nav-link__chevron' %}
+            </a>
+            <div class="mega-menu" role="region" aria-label="Accessories Menu">
+              <div class="mega-menu__container">
+                <div class="mega-menu__column">
+                  <h3 class="mega-menu__title text-eyebrow">Category</h3>
+                  <ul class="mega-menu__list" role="list">
+                    <li><a href="{{ routes.collections_url }}/jewellery" class="mega-menu__link">Jewellery</a></li>
+                    <li><a href="{{ routes.collections_url }}/bags" class="mega-menu__link">Bags</a></li>
+                    <li><a href="{{ routes.collections_url }}/hats" class="mega-menu__link">Hats</a></li>
+                    <li><a href="{{ routes.collections_url }}/hair-accessories" class="mega-menu__link">Hair Accessories</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- 6. BEAUTY -->
+          <li class="nav-item">
+            <a href="{{ routes.collections_url }}/beauty" class="nav-link text-nav">
+              <span>BEAUTY</span>
+            </a>
+          </li>
+
+          <!-- 7. SPORTS -->
+          <li class="nav-item nav-item--has-mega" data-nav-item>
+            <a href="{{ routes.collections_url }}/sports" class="nav-link text-nav" aria-expanded="false">
+              <span>SPORTS</span>
+              {% render 'icon', name: 'chevron-down', class: 'nav-link__chevron' %}
+            </a>
+            <div class="mega-menu" role="region" aria-label="Sports Menu">
+              <div class="mega-menu__container">
+                <div class="mega-menu__column">
+                  <h3 class="mega-menu__title text-eyebrow">Disciplines</h3>
+                  <ul class="mega-menu__list" role="list">
+                    <li><a href="{{ routes.collections_url }}/football" class="mega-menu__link">Football</a></li>
+                    <li><a href="{{ routes.collections_url }}/boxing" class="mega-menu__link">Boxing</a></li>
+                    <li><a href="{{ routes.collections_url }}/badminton" class="mega-menu__link">Badminton</a></li>
+                    <li><a href="{{ routes.collections_url }}/swimming" class="mega-menu__link">Swimming</a></li>
+                  </ul>
+                </div>
+                <div class="mega-menu__column">
+                  <h3 class="mega-menu__title text-eyebrow">&nbsp;</h3>
+                  <ul class="mega-menu__list" role="list">
+                    <li><a href="{{ routes.collections_url }}/table-tennis" class="mega-menu__link">Table Tennis</a></li>
+                    <li><a href="{{ routes.collections_url }}/tennis" class="mega-menu__link">Tennis</a></li>
+                    <li><a href="{{ routes.collections_url }}/basketball" class="mega-menu__link">Basketball</a></li>
+                    <li><a href="{{ routes.collections_url }}/baseball" class="mega-menu__link">Baseball</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+
+        {%- else -%}
+          {% comment %}
+            Native Shopify Linklist Menu with dynamic multi-tier mega dropdowns
+          {% endcomment %}
+          {%- for link in main_menu.links -%}
+            <li class="nav-item{% if link.links.size > 0 %} nav-item--has-mega{% endif %}" data-nav-item>
+              <a
+                href="{{ link.url }}"
+                class="nav-link text-nav"
+                {% if link.links.size > 0 %}
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                {% endif %}
+              >
+                <span>{{ link.title }}</span>
+                {%- if link.links.size > 0 -%}
+                  {% render 'icon', name: 'chevron-down', class: 'nav-link__chevron' %}
+                {%- endif -%}
+              </a>
+
+              {%- if link.links.size > 0 -%}
+                <div class="mega-menu" role="region" aria-label="{{ link.title }} Menu">
+                  <div class="mega-menu__container">
+                    {%- for child in link.links -%}
+                      <div class="mega-menu__column">
+                        <a href="{{ child.url }}" class="mega-menu__title text-eyebrow">{{ child.title }}</a>
+                        {%- if child.links.size > 0 -%}
+                          <ul class="mega-menu__list" role="list">
+                            {%- for grandchild in child.links -%}
+                              <li>
+                                <a href="{{ grandchild.url }}" class="mega-menu__link">
+                                  {{ grandchild.title }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    </nav>
+
+    <!-- Right: Search, Account & Cart Actions -->
+    <div class="site-header__actions">
+      <!-- Search Trigger -->
+      <button
+        type="button"
+        class="site-header__action-btn site-header__search-toggle"
+        aria-label="Search store"
+        aria-expanded="false"
+        aria-controls="HeaderSearchDropdown"
+        data-search-toggle
+      >
+        {% render 'icon', name: 'search' %}
+        <span class="visually-hidden">Search</span>
+      </button>
+
+      <!-- Account Link -->
+      {%- if shop.customer_accounts_enabled -%}
+        <a
+          href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+          class="site-header__action-btn"
+          aria-label="Customer Account"
+        >
+          {% render 'icon', name: 'account' %}
+          <span class="visually-hidden">Account</span>
+        </a>
+      {%- endif -%}
+
+      <!-- Cart Link -->
+      <a
+        href="{{ routes.cart_url }}"
+        class="site-header__action-btn site-header__cart-btn"
+        aria-label="Shopping Cart, {{ cart.item_count }} items"
+      >
+        {% render 'icon', name: 'cart' %}
+        <span class="visually-hidden">Cart</span>
+        <span
+          class="site-header__cart-badge{% if cart.item_count == 0 %} is-empty{% endif %}"
+          data-cart-count
+        >
+          {{ cart.item_count }}
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Expandable Header Search Bar -->
+  <div
+    id="HeaderSearchDropdown"
+    class="header-search-bar"
+    role="region"
+    aria-label="Search Form"
+    aria-hidden="true"
+    hidden
+  >
+    <div class="header-search-bar__inner">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="header-search-bar__form">
+        {% render 'icon', name: 'search', class: 'header-search-bar__icon' %}
+        <input
+          type="search"
+          name="q"
+          placeholder="Search collections, articles, products..."
+          class="header-search-bar__input"
+          aria-label="Search our store"
+          autocomplete="off"
+          data-search-input
+        >
+        <button
+          type="button"
+          class="header-search-bar__close btn"
+          aria-label="Close search"
+          data-search-close
+        >
+          {% render 'icon', name: 'close' %}
+          <span class="visually-hidden">Close</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+{% render 'mobile-menu-drawer', menu: main_menu, has_nested_links: has_nested_links %}
+
+{% stylesheet %}
+  .site-header {
+    background-color: var(--color-background);
+    width: 100%;
+    position: relative;
+    z-index: 100;
+    transition: box-shadow var(--transition-normal), background-color var(--transition-normal);
+  }
+
+  .site-header--bordered {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .site-header--sticky {
+    position: sticky;
+    top: 0;
+  }
+
+  .site-header.is-stuck {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Header Padding Variants */
+  .header-padding--compact .site-header__container {
+    height: 3.75rem;
+  }
+  .header-padding--medium .site-header__container {
+    height: 4.5rem;
+  }
+  .header-padding--relaxed .site-header__container {
+    height: 5.25rem;
+  }
+
+  .site-header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: var(--page-margin);
+    width: 100%;
+    position: relative;
+  }
+
+  /* Left Side: Logo & Mobile Toggle */
+  .site-header__left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .site-header__mobile-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    min-height: 44px;
+    min-width: 44px;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .site-header__logo-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .site-header__logo-link {
+    text-decoration: none;
+    color: var(--color-text);
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .site-header__logo-text {
+    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .site-header__logo-img {
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* Center: Desktop Navigation */
+  .site-header__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 auto;
+    height: 100%;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 1.8vw, 2.25rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: static; /* Allows full-width mega menu */
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--color-text);
+    text-decoration: none;
+    font-family: var(--font-primary--family);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    height: 100%;
+    position: relative;
+    transition: color var(--transition-fast);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--transition-normal);
+  }
+
+  .nav-link:hover,
+  .nav-item:hover .nav-link,
+  .nav-link:focus-visible {
+    color: var(--color-accent);
+  }
+
+  .nav-item:hover .nav-link::after,
+  .nav-link[aria-expanded="true"]::after {
+    transform: scaleX(1);
+  }
+
+  .nav-link__chevron {
+    transition: transform var(--transition-fast);
+    opacity: 0.65;
+  }
+
+  .nav-item:hover .nav-link__chevron,
+  .nav-link[aria-expanded="true"] .nav-link__chevron {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+
+  /* Mega Menu Panel */
+  .mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(6px);
+    transition: opacity var(--transition-normal),
+                visibility var(--transition-normal),
+                transform var(--transition-normal);
+    z-index: 99;
+    padding-block: 2.5rem 3rem;
+  }
+
+  .mega-menu::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 0;
+    width: 100%;
+    height: 16px;
+  }
+
+  .nav-item:hover .mega-menu,
+  .nav-item:focus-within .mega-menu,
+  .nav-item.is-active .mega-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  .mega-menu__container {
+    max-width: var(--page-width);
+    margin-inline: auto;
+    padding-inline: var(--page-margin);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .mega-menu__column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .mega-menu__title {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+  }
+
+  .mega-menu__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .mega-menu__link {
+    font-family: var(--font-primary--family);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+    display: inline-block;
+  }
+
+  .mega-menu__link:hover,
+  .mega-menu__link:focus-visible {
+    color: var(--color-primary);
+    transform: translateX(3px);
+  }
+
+  .mega-menu__link--accent {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .mega-menu__column--editorial {
+    grid-column: span 1;
+  }
+
+  .mega-menu__card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 1.75rem;
+    border-radius: var(--card-radius);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    height: 100%;
+  }
+
+  .mega-menu__card-title {
+    font-size: 1.15rem;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .mega-menu__card-desc {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Right Side Actions */
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .site-header__action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 8px;
+    color: var(--color-text);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .site-header__action-btn:hover,
+  .site-header__action-btn:focus-visible {
+    color: var(--color-accent);
+    transform: translateY(-1px);
+  }
+
+  .site-header__action-btn svg,
+  .site-header__mobile-toggle svg {
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    display: block !important;
+    flex-shrink: 0 !important;
+  }
+
+  .site-header__cart-badge {
+    position: absolute;
+    top: 4px;
+    right: 2px;
+    min-width: 18px;
+    height: 18px;
+    padding-inline: 4px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: 0.65rem;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 9px;
+    letter-spacing: 0;
+  }
+
+  .site-header__cart-badge.is-empty {
+    display: none;
+  }
+
+  /* Expandable Header Search Dropdown */
+  .header-search-bar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+    padding: 1rem var(--page-margin);
+    z-index: 102;
+    animation: searchSlideDown 200ms var(--transition-normal);
+  }
+
+  @keyframes searchSlideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .header-search-bar__inner {
+    max-width: 640px;
+    margin-inline: auto;
+  }
+
+  .header-search-bar__form {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .header-search-bar__icon {
+    position: absolute;
+    left: 14px;
+    color: var(--color-text-muted);
+    pointer-events: none;
+  }
+
+  .header-search-bar__input {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 48px 12px 42px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--input-radius);
+    font-family: var(--font-primary--family);
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+
+  .header-search-bar__close {
+    position: absolute;
+    right: 6px;
+    background: transparent;
+    border: none;
+    min-height: 36px;
+    min-width: 36px;
+    padding: 6px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+
+  .header-search-bar__close:hover {
+    color: var(--color-primary);
+  }
+
+  /* Mobile Drawer Styles */
+  .mobile-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+  }
+
+  .mobile-drawer[hidden] {
+    display: none;
+  }
+
+  .mobile-drawer__backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(17, 17, 17, 0.45);
+    backdrop-filter: blur(2px);
+    animation: fadeIn 220ms ease;
+  }
+
+  .mobile-drawer__panel {
+    position: relative;
+    width: min(380px, 86vw);
+    height: 100%;
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.12);
+    animation: slideInLeft 260ms var(--transition-normal);
+    z-index: 2;
+    overflow-y: auto;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .mobile-drawer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mobile-drawer__close {
+    min-height: 40px;
+    min-width: 40px;
+    padding: 8px;
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .mobile-drawer__search {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mobile-drawer__search-form {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-drawer__search-input {
+    min-height: 44px;
+    padding-right: 40px;
+    font-size: 0.875rem;
+  }
+
+  .mobile-drawer__search-btn {
+    position: absolute;
+    right: 8px;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+
+  .mobile-drawer__nav {
+    flex: 1 1 auto;
+    padding-block: 0.5rem;
+  }
+
+  .mobile-drawer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-drawer__item {
+    border-bottom: 1px solid rgba(217, 213, 206, 0.4);
+  }
+
+  .mobile-nav__summary,
+  .mobile-nav__direct-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    font-family: var(--font-primary--family);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    text-decoration: none;
+    cursor: pointer;
+    list-style: none;
+    min-height: 48px;
+    user-select: none;
+  }
+
+  .mobile-nav__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .accordion-chevron {
+    transition: transform var(--transition-fast);
+  }
+
+  .mobile-nav__accordion[open] > .mobile-nav__summary .accordion-chevron {
+    transform: rotate(180deg);
+  }
+
+  .mobile-nav__sublist {
+    list-style: none;
+    margin: 0;
+    padding: 0.25rem 1.5rem 1rem 2rem;
+    background-color: var(--color-surface);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .mobile-nav__link {
+    font-family: var(--font-primary--family);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    display: inline-block;
+    padding-block: 4px;
+    min-height: 36px;
+    line-height: 1.4;
+  }
+
+  .mobile-nav__link--view-all {
+    color: var(--color-accent);
+    font-weight: 600;
+    padding-top: 0.25rem;
+  }
+
+  .mobile-drawer__footer {
+    border-top: 1px solid var(--color-border);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background-color: var(--color-surface);
+  }
+
+  .mobile-drawer__footer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    min-height: 44px;
+  }
+
+  /* Responsive Breakpoints */
+  @media (max-width: 1024px) {
+    .site-header__mobile-toggle {
+      display: inline-flex;
+    }
+    .site-header__nav {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .site-header__container {
+      padding-inline: 16px;
+    }
+    .site-header__logo-text {
+      font-size: 1.2rem;
+    }
+  }
+{% endstylesheet %}
+
+<script>
+  (function () {
+    // ----------------------------------------------------
+    // Mobile Drawer Controller
+    // ----------------------------------------------------
+    const drawer = document.getElementById('MobileMenuDrawer');
+    const openBtns = document.querySelectorAll('[data-drawer-open]');
+    const closeBtns = document.querySelectorAll('[data-drawer-close]');
+
+    function openDrawer() {
+      if (!drawer) return;
+      drawer.removeAttribute('hidden');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      openBtns.forEach((btn) => btn.setAttribute('aria-expanded', 'true'));
+      const firstFocusable = drawer.querySelector('button, input, a');
+      if (firstFocusable) firstFocusable.focus();
+    }
+
+    function closeDrawer() {
+      if (!drawer) return;
+      drawer.setAttribute('hidden', '');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      openBtns.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
+    }
+
+    openBtns.forEach((btn) => btn.addEventListener('click', openDrawer));
+    closeBtns.forEach((btn) => btn.addEventListener('click', closeDrawer));
+
+    // ----------------------------------------------------
+    // Search Dropdown Controller
+    // ----------------------------------------------------
+    const searchDropdown = document.getElementById('HeaderSearchDropdown');
+    const searchToggle = document.querySelector('[data-search-toggle]');
+    const searchClose = document.querySelector('[data-search-close]');
+    const searchInput = document.querySelector('[data-search-input]');
+
+    function toggleSearch() {
+      if (!searchDropdown) return;
+      const isHidden = searchDropdown.hasAttribute('hidden');
+      if (isHidden) {
+        searchDropdown.removeAttribute('hidden');
+        searchDropdown.setAttribute('aria-hidden', 'false');
+        if (searchToggle) searchToggle.setAttribute('aria-expanded', 'true');
+        if (searchInput) {
+          setTimeout(() => searchInput.focus(), 50);
+        }
+      } else {
+        closeSearch();
+      }
+    }
+
+    function closeSearch() {
+      if (!searchDropdown) return;
+      searchDropdown.setAttribute('hidden', '');
+      searchDropdown.setAttribute('aria-hidden', 'true');
+      if (searchToggle) {
+        searchToggle.setAttribute('aria-expanded', 'false');
+        searchToggle.focus();
+      }
+    }
+
+    if (searchToggle) searchToggle.addEventListener('click', toggleSearch);
+    if (searchClose) searchClose.addEventListener('click', closeSearch);
+
+    // ----------------------------------------------------
+    // Keyboard Navigation (Escape Key & Focus Trap)
+    // ----------------------------------------------------
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        if (drawer && !drawer.hasAttribute('hidden')) {
+          closeDrawer();
+        }
+        if (searchDropdown && !searchDropdown.hasAttribute('hidden')) {
+          closeSearch();
+        }
+        // Close any active mega menus on Escape
+        document.querySelectorAll('.nav-item--has-mega').forEach((item) => {
+          item.classList.remove('is-active');
+          const link = item.querySelector('.nav-link');
+          if (link) link.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+
+    // ----------------------------------------------------
+    // Desktop Mega Menu Controller
+    // ----------------------------------------------------
+    const navItems = document.querySelectorAll('.nav-item--has-mega');
+    navItems.forEach((item) => {
+      const link = item.querySelector('.nav-link');
+      let timeout;
+
+      item.addEventListener('mouseenter', () => {
+        clearTimeout(timeout);
+        navItems.forEach((other) => {
+          if (other !== item) {
+            other.classList.remove('is-active');
+            const otherLink = other.querySelector('.nav-link');
+            if (otherLink) otherLink.setAttribute('aria-expanded', 'false');
+          }
+        });
+        item.classList.add('is-active');
+        if (link) link.setAttribute('aria-expanded', 'true');
+      });
+
+      item.addEventListener('mouseleave', () => {
+        timeout = setTimeout(() => {
+          item.classList.remove('is-active');
+          if (link) link.setAttribute('aria-expanded', 'false');
+        }, 120);
+      });
+
+      if (link) {
+        link.addEventListener('focus', () => {
+          item.classList.add('is-active');
+          link.setAttribute('aria-expanded', 'true');
+        });
+        link.addEventListener('click', (e) => {
+          if (window.innerWidth > 1024) {
+            const isActive = item.classList.contains('is-active');
+            if (!isActive) {
+              e.preventDefault();
+              item.classList.add('is-active');
+              link.setAttribute('aria-expanded', 'true');
+            }
+          }
+        });
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-item--has-mega')) {
+        navItems.forEach((item) => {
+          item.classList.remove('is-active');
+          const link = item.querySelector('.nav-link');
+          if (link) link.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+
+    // ----------------------------------------------------
+    // Sticky Header Scroll Listener
+    // ----------------------------------------------------
+    const headerEl = document.querySelector('.site-header');
+    if (headerEl && headerEl.dataset.stickyHeader === 'true') {
+      window.addEventListener(
+        'scroll',
+        function () {
+          if (window.scrollY > 20) {
+            headerEl.classList.add('is-stuck');
+          } else {
+            headerEl.classList.remove('is-stuck');
+          }
+        },
+        { passive: true }
+      );
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 80,
+      "max": 260,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 140
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_editorial_sample_nav",
+      "label": "Enable Fashion Department Navigation",
+      "default": true,
+      "info": "Displays the 7 fashion departments (MEN, WOMEN, KIDS, FOOTWEAR, ACCESSORIES, BEAUTY, SPORTS) and mega menus when the selected Shopify linklist does not have nested submenus."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_header",
+      "label": "Enable sticky header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_separator_line",
+      "label": "Show bottom border",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "header_padding",
+      "label": "Header height",
+      "options": [
+        {
+          "value": "compact",
+          "label": "Compact (60px)"
+        },
+        {
+          "value": "medium",
+          "label": "Medium (72px)"
+        },
+        {
+          "value": "relaxed",
+          "label": "Relaxed (84px)"
+        }
+      ],
+      "default": "medium"
+    }
+  ]
+}
+{% endschema %}

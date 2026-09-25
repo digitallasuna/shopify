@@ -1,0 +1,217 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "eyebrow": "NEW SEASON",
+        "heading": "THE NEW STANDARD",
+        "description": "Contemporary pieces designed for everyday confidence.",
+        "primary_button_text": "SHOP MEN",
+        "primary_button_link": "/collections/men",
+        "secondary_button_text": "SHOP WOMEN",
+        "secondary_button_link": "/collections/women",
+        "content_position": "middle-center",
+        "text_alignment": "center",
+        "overlay_opacity": 25,
+        "text_color": "#FFFFFF",
+        "section_height": "large",
+        "full_width": true
+      }
+    },
+    "categories": {
+      "type": "featured-categories",
+      "blocks": {
+        "cat_men": {
+          "type": "category",
+          "settings": {
+            "title": "MEN",
+            "description": "Tailored outerwear, shirts & denim",
+            "link": "/collections/men"
+          }
+        },
+        "cat_women": {
+          "type": "category",
+          "settings": {
+            "title": "WOMEN",
+            "description": "Dresses, knitwear & seasonal tailoring",
+            "link": "/collections/women"
+          }
+        },
+        "cat_kids": {
+          "type": "category",
+          "settings": {
+            "title": "KIDS",
+            "description": "Durable essentials for everyday wear",
+            "link": "/collections/kids"
+          }
+        },
+        "cat_footwear": {
+          "type": "category",
+          "settings": {
+            "title": "FOOTWEAR",
+            "description": "Crafted leather shoes, boots & trainers",
+            "link": "/collections/footwear"
+          }
+        },
+        "cat_accessories": {
+          "type": "category",
+          "settings": {
+            "title": "ACCESSORIES",
+            "description": "Jewellery, leather bags & finishing touches",
+            "link": "/collections/accessories"
+          }
+        },
+        "cat_beauty": {
+          "type": "category",
+          "settings": {
+            "title": "BEAUTY",
+            "description": "Formulations for skin, hair & scent",
+            "link": "/collections/beauty"
+          }
+        },
+        "cat_sports": {
+          "type": "category",
+          "settings": {
+            "title": "SPORTS",
+            "description": "Performance apparel & training gear",
+            "link": "/collections/sports"
+          }
+        }
+      },
+      "block_order": [
+        "cat_men",
+        "cat_women",
+        "cat_kids",
+        "cat_footwear",
+        "cat_accessories",
+        "cat_beauty",
+        "cat_sports"
+      ],
+      "settings": {
+        "eyebrow": "DEPARTMENTS",
+        "heading": "SHOP BY CATEGORY",
+        "description": "Explore curated collections crafted for the modern wardrobe.",
+        "columns_desktop": 4,
+        "media_aspect_ratio": "portrait",
+        "section_spacing": "medium"
+      }
+    },
+    "new_arrivals": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "CURATED SELECTION",
+        "heading": "NEW ARRIVALS",
+        "description": "Discover the latest additions to our contemporary collection.",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "show_vendor": false,
+        "show_quick_add": true,
+        "show_view_all": true,
+        "view_all_text": "View All Products",
+        "section_spacing": "medium"
+      }
+    },
+    "editorial_split": {
+      "type": "editorial-split",
+      "settings": {
+        "image_position": "left",
+        "eyebrow": "THE EDIT",
+        "heading": "STYLE WITHOUT COMPROMISE",
+        "description": "Discover considered pieces designed to move effortlessly between everyday life and special moments.",
+        "button_text": "EXPLORE THE EDIT",
+        "button_link": "/collections/all",
+        "text_alignment": "left",
+        "bg_color": "soft_beige",
+        "section_spacing": "medium"
+      }
+    },
+    "curated_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "WARDROBE FOUNDATIONS",
+        "heading": "SEASONAL ESSENTIALS",
+        "description": "Enduring staples designed with architectural precision and natural textures.",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "show_vendor": false,
+        "show_quick_add": true,
+        "show_view_all": true,
+        "view_all_text": "View All Essentials",
+        "section_spacing": "medium"
+      }
+    },
+    "trust_badges": {
+      "type": "trust-badges",
+      "blocks": {
+        "badge_delivery": {
+          "type": "badge",
+          "settings": {
+            "icon": "delivery",
+            "title": "COMPLIMENTARY DELIVERY",
+            "description": "On eligible orders"
+          }
+        },
+        "badge_returns": {
+          "type": "badge",
+          "settings": {
+            "icon": "returns",
+            "title": "EASY RETURNS",
+            "description": "Straightforward return policy"
+          }
+        },
+        "badge_secure": {
+          "type": "badge",
+          "settings": {
+            "icon": "secure",
+            "title": "SECURE CHECKOUT",
+            "description": "Safe & encrypted payments"
+          }
+        },
+        "badge_support": {
+          "type": "badge",
+          "settings": {
+            "icon": "support",
+            "title": "CUSTOMER CARE",
+            "description": "Dedicated client assistance"
+          }
+        }
+      },
+      "block_order": [
+        "badge_delivery",
+        "badge_returns",
+        "badge_secure",
+        "badge_support"
+      ],
+      "settings": {
+        "bg_color": "warm_ivory",
+        "section_spacing": "small",
+        "show_border_top": true,
+        "show_border_bottom": true
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "THE EDIT",
+        "heading": "JOIN THE EDIT",
+        "description": "Be the first to discover new arrivals, exclusive offers and seasonal edits.",
+        "button_text": "SUBSCRIBE",
+        "privacy_note": "By subscribing, you agree to our Privacy Policy and consent to receive marketing updates.",
+        "bg_color": "soft_beige",
+        "section_spacing": "medium",
+        "full_width": false
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "categories",
+    "new_arrivals",
+    "editorial_split",
+    "curated_collection",
+    "trust_badges",
+    "newsletter"
+  ]
+}

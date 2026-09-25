@@ -1,0 +1,51 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu_shop": {
+          "type": "link_list",
+          "settings": {
+            "heading": "SHOP"
+          }
+        },
+        "menu_care": {
+          "type": "link_list",
+          "settings": {
+            "heading": "CUSTOMER CARE"
+          }
+        },
+        "menu_about": {
+          "type": "link_list",
+          "settings": {
+            "heading": "ABOUT"
+          }
+        },
+        "menu_legal": {
+          "type": "link_list",
+          "settings": {
+            "heading": "LEGAL"
+          }
+        }
+      },
+      "block_order": [
+        "menu_shop",
+        "menu_care",
+        "menu_about",
+        "menu_legal"
+      ],
+      "settings": {
+        "brand_headline": "METICULOUS",
+        "brand_description": "Modern, refined fashion crafted with architectural precision and enduring quality.",
+        "show_payment_icons": true,
+        "show_localization": true,
+        "bg_color": "soft_beige"
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

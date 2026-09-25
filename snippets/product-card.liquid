@@ -1,0 +1,179 @@
+{% comment %}
+  Meticulous Fashion - Reusable Editorial Product Card
+  Accepts:
+  - product: {Object} Shopify Product object
+  - media_aspect_ratio: {String} 'portrait' (3:4), 'square' (1:1), 'adapt'
+  - show_secondary_image: {Boolean} Reveal second image on desktop hover (default: true)
+  - show_vendor: {Boolean} Show product vendor (default: false)
+  - show_quick_add: {Boolean} Show Quick Add button (default: true)
+  - lazy_load: {Boolean} Lazy load image (default: true)
+  - section_id: {String} Parent section ID
+
+  Usage:
+  {% render 'product-card', product: product, media_aspect_ratio: 'portrait' %}
+{% endcomment %}
+
+{%- liquid
+  assign aspect_ratio = media_aspect_ratio | default: 'portrait'
+  assign show_hover_image = show_secondary_image | default: true
+  assign is_lazy = lazy_load
+  if is_lazy == null
+    assign is_lazy = true
+  endif
+
+  if is_lazy
+    assign image_loading = 'lazy'
+  else
+    assign image_loading = 'eager'
+  endif
+
+  assign featured_media = product.featured_media
+  assign has_secondary_image = false
+  if show_hover_image and product.media.size > 1
+    assign has_secondary_image = true
+    assign secondary_media = product.media[1]
+  endif
+
+  assign color_option = null
+  for option in product.options_with_values
+    assign opt_name_down = option.name | downcase
+    if opt_name_down == 'color' or opt_name_down == 'colour'
+      assign color_option = option
+      break
+    endif
+  endfor
+-%}
+
+<article class="product-card product-card--{{ aspect_ratio }}" data-product-id="{{ product.id }}">
+  <!-- Product Media Container -->
+  <div class="product-card__media-wrapper">
+    <a
+      href="{{ product.url }}"
+      class="product-card__media-link{% if has_secondary_image %} has-secondary-image{% endif %}"
+      aria-label="{{ product.title | escape }}"
+      tabindex="-1"
+    >
+      {%- if featured_media != blank -%}
+        <!-- Primary Featured Image -->
+        {{
+          featured_media
+          | image_url: width: 800
+          | image_tag:
+            class: 'product-card__image product-card__image--primary',
+            widths: '240, 360, 480, 600, 720, 800',
+            sizes: '(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw',
+            loading: image_loading,
+            alt: featured_media.alt | default: product.title | escape
+        }}
+
+        <!-- Secondary Hover Image (Desktop Only) -->
+        {%- if has_secondary_image -%}
+          {{
+            secondary_media
+            | image_url: width: 800
+            | image_tag:
+              class: 'product-card__image product-card__image--secondary',
+              widths: '240, 360, 480, 600, 720, 800',
+              sizes: '(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw',
+              loading: 'lazy',
+              alt: secondary_media.alt | default: product.title | escape
+          }}
+        {%- endif -%}
+
+      {%- else -%}
+        <!-- Onboarding Placeholder Image -->
+        <div class="product-card__placeholder">
+          {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder-svg' }}
+        </div>
+      {%- endif -%}
+    </a>
+
+    <!-- Product Badges -->
+    <div class="product-card__badges" aria-label="Product Badges">
+      {%- if product.available == false -%}
+        <span class="badge badge--sold-out">Sold Out</span>
+      {%- elsif product.compare_at_price > product.price -%}
+        <span class="badge badge--sale">Sale</span>
+      {%- elsif product.tags contains 'new' or product.tags contains 'New' -%}
+        <span class="badge badge--new">New</span>
+      {%- endif -%}
+    </div>
+
+    <!-- Quick Add Action -->
+    {%- if show_quick_add != false and product.available -%}
+      <div class="product-card__quick-add">
+        {%- if product.has_only_default_variant -%}
+          <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="product-card__quick-add-form">
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button
+              type="submit"
+              name="add"
+              class="btn btn--small btn--primary product-card__quick-add-btn"
+              aria-label="Quick Add {{ product.title | escape }} to Bag"
+            >
+              <span>+ Quick Add</span>
+            </button>
+          </form>
+        {%- else -%}
+          <a
+            href="{{ product.url }}"
+            class="btn btn--small btn--secondary product-card__quick-add-btn"
+            aria-label="Select options for {{ product.title | escape }}"
+          >
+            <span>Select Size</span>
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Product Details -->
+  <div class="product-card__content">
+    {%- if show_vendor and product.vendor != blank -%}
+      <span class="product-card__vendor text-caption">{{ product.vendor }}</span>
+    {%- endif -%}
+
+    <h3 class="product-card__title">
+      <a href="{{ product.url }}" class="product-card__title-link">
+        {{ product.title | default: 'Sample Editorial Product' }}
+      </a>
+    </h3>
+
+    <!-- Product Price -->
+    <div class="product-card__price product-price">
+      {%- if product != blank -%}
+        {%- if product.compare_at_price > product.price -%}
+          <span class="product-price--sale">{{ product.price | money }}</span>
+          <span class="product-price--compare">{{ product.compare_at_price | money }}</span>
+        {%- else -%}
+          {%- if product.price_varies -%}
+            <span>From {{ product.price_min | money }}</span>
+          {%- else -%}
+            <span>{{ product.price | money }}</span>
+          {%- endif -%}
+        {%- endif -%}
+      {%- else -%}
+        <span>{{ 9500 | money }}</span>
+      {%- endif -%}
+    </div>
+
+    <!-- Color Swatches (if available) -->
+    {%- if color_option != null and color_option.values.size > 1 -%}
+      <div class="product-card__swatches swatch-group" aria-label="Available colors">
+        {%- for color_val in color_option.values limit: 5 -%}
+          <span
+            class="swatch{% if forloop.first %} is-active{% endif %}"
+            title="{{ color_val }}"
+            style="background-color: {{ color_val | downcase }};"
+          >
+            <span class="visually-hidden">{{ color_val }}</span>
+          </span>
+        {%- endfor -%}
+        {%- if color_option.values.size > 5 -%}
+          <span class="product-card__swatch-more text-caption">+{{ color_option.values.size | minus: 5 }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</article>
