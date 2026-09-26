@@ -1,5 +1,5 @@
 {% comment %}
-  Meticulous Fashion - Editorial Multi-Column Footer
+  Wakhan Styles - Editorial Multi-Column Footer
   Includes brand story, social media links, dynamic menu columns,
   native payment types, optional localization, and legal copyright bar.
 {% endcomment %}
@@ -25,7 +25,7 @@
       <!-- Column 1: Brand Story & Socials -->
       <div class="site-footer__brand-col">
         <h3 class="site-footer__brand-title font-heading text-h3">
-          {{ section.settings.brand_headline | default: shop.name }}
+          {{ section.settings.brand_headline | default: settings.brand_name | default: shop.name }}
         </h3>
 
         {%- if section.settings.brand_description != blank -%}
@@ -113,7 +113,7 @@
                       <li><a href="{{ routes.collections_url }}/sports" class="site-footer__link text-small">Sports</a></li>
                     {%- when 'CUSTOMER CARE' -%}
                       <li><a href="{{ routes.root_url }}pages/contact" class="site-footer__link text-small">Contact Us</a></li>
-                      <li><a href="{{ routes.root_url }}pages/delivery" class="site-footer__link text-small">Delivery & Shipping</a></li>
+                      <li><a href="{{ routes.root_url }}pages/shipping" class="site-footer__link text-small">Shipping & Delivery</a></li>
                       <li><a href="{{ routes.root_url }}pages/returns" class="site-footer__link text-small">Returns & Exchanges</a></li>
                       <li><a href="{{ routes.root_url }}pages/faqs" class="site-footer__link text-small">FAQs</a></li>
                       <li><a href="{{ routes.root_url }}pages/size-guide" class="site-footer__link text-small">Size Guide</a></li>
@@ -152,7 +152,7 @@
                     <li><a href="{{ routes.collections_url }}/sports" class="site-footer__link text-small">Sports</a></li>
                   {%- when 'CUSTOMER CARE' -%}
                     <li><a href="{{ routes.root_url }}pages/contact" class="site-footer__link text-small">Contact Us</a></li>
-                    <li><a href="{{ routes.root_url }}pages/delivery" class="site-footer__link text-small">Delivery & Shipping</a></li>
+                    <li><a href="{{ routes.root_url }}pages/shipping" class="site-footer__link text-small">Shipping & Delivery</a></li>
                     <li><a href="{{ routes.root_url }}pages/returns" class="site-footer__link text-small">Returns & Exchanges</a></li>
                     <li><a href="{{ routes.root_url }}pages/faqs" class="site-footer__link text-small">FAQs</a></li>
                     <li><a href="{{ routes.root_url }}pages/size-guide" class="site-footer__link text-small">Size Guide</a></li>
@@ -452,7 +452,7 @@
       "type": "text",
       "id": "brand_headline",
       "label": "Brand headline",
-      "default": "METICULOUS"
+      "default": "Wakhan Styles"
     },
     {
       "type": "textarea",

@@ -1,5 +1,5 @@
 {% comment %}
-  Meticulous Fashion - Editorial OS 2.0 Header
+  Wakhan Styles - Editorial OS 2.0 Header
   Includes desktop mega-menu navigation, mobile drawer, predictive search trigger, and sticky header.
 {% endcomment %}
 
@@ -52,7 +52,7 @@
       <div class="site-header__logo-wrapper site-header__logo-wrapper--desktop">
         <a href="{{ routes.root_url }}" class="site-header__logo-link">
           {%- if section.settings.logo != blank -%}
-            {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+            {%- assign logo_alt = section.settings.logo.alt | default: settings.brand_name | default: shop.name | escape -%}
             {{
               section.settings.logo
               | image_url: width: 600
@@ -62,7 +62,7 @@
                 alt: logo_alt
             }}
           {%- else -%}
-            <span class="site-header__logo-text font-heading">{{ shop.name }}</span>
+            <span class="site-header__logo-text font-heading">{{ settings.brand_name | default: shop.name }}</span>
           {%- endif -%}
         </a>
       </div>
@@ -138,7 +138,7 @@
                   <h3 class="mega-menu__title text-eyebrow">Curations</h3>
                   <ul class="mega-menu__list" role="list">
                     <li><a href="{{ routes.collections_url }}/footwear-women" class="mega-menu__link">Women's Footwear</a></li>
-                    <li><a href="{{ routes.collections_url }}/jewellery" class="mega-menu__link">Fine Jewellery</a></li>
+                    <li><a href="{{ routes.collections_url }}/jewellery" class="mega-menu__link">Fine Jewelry</a></li>
                     <li><a href="{{ routes.collections_url }}/women-new" class="mega-menu__link mega-menu__link--accent">New In Women</a></li>
                   </ul>
                 </div>
@@ -196,14 +196,14 @@
                   <ul class="mega-menu__list" role="list">
                     <li><a href="{{ routes.collections_url }}/footwear-men" class="mega-menu__link">Men's Shoes & Boots</a></li>
                     <li><a href="{{ routes.collections_url }}/footwear-women" class="mega-menu__link">Women's Heels, Loafers & Boots</a></li>
-                    <li><a href="{{ routes.collections_url }}/footwear-kids" class="mega-menu__link">Kids' Shoes & Trainers</a></li>
+                    <li><a href="{{ routes.collections_url }}/footwear-kids" class="mega-menu__link">Kids' Shoes & Sneakers</a></li>
                   </ul>
                 </div>
                 <div class="mega-menu__column">
                   <h3 class="mega-menu__title text-eyebrow">Highlights</h3>
                   <ul class="mega-menu__list" role="list">
                     <li><a href="{{ routes.collections_url }}/footwear-leather" class="mega-menu__link">Crafted Leather</a></li>
-                    <li><a href="{{ routes.collections_url }}/footwear-trainers" class="mega-menu__link">Minimalist Trainers</a></li>
+                    <li><a href="{{ routes.collections_url }}/footwear-trainers" class="mega-menu__link">Minimalist Sneakers</a></li>
                   </ul>
                 </div>
               </div>
@@ -221,7 +221,7 @@
                 <div class="mega-menu__column">
                   <h3 class="mega-menu__title text-eyebrow">Category</h3>
                   <ul class="mega-menu__list" role="list">
-                    <li><a href="{{ routes.collections_url }}/jewellery" class="mega-menu__link">Jewellery</a></li>
+                    <li><a href="{{ routes.collections_url }}/jewellery" class="mega-menu__link">Jewelry</a></li>
                     <li><a href="{{ routes.collections_url }}/bags" class="mega-menu__link">Bags</a></li>
                     <li><a href="{{ routes.collections_url }}/hats" class="mega-menu__link">Hats</a></li>
                     <li><a href="{{ routes.collections_url }}/hair-accessories" class="mega-menu__link">Hair Accessories</a></li>
@@ -319,7 +319,7 @@
       <div class="site-header__logo-wrapper site-header__logo-wrapper--mobile">
         <a href="{{ routes.root_url }}" class="site-header__logo-link">
           {%- if section.settings.logo != blank -%}
-            {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+            {%- assign logo_alt = section.settings.logo.alt | default: settings.brand_name | default: shop.name | escape -%}
             {{
               section.settings.logo
               | image_url: width: 400
@@ -329,7 +329,7 @@
                 alt: logo_alt
             }}
           {%- else -%}
-            <span class="site-header__logo-text font-heading">{{ shop.name }}</span>
+            <span class="site-header__logo-text font-heading">{{ settings.brand_name | default: shop.name }}</span>
           {%- endif -%}
         </a>
       </div>

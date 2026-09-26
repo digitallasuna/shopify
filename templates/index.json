@@ -17,7 +17,7 @@
           "settings": {
             "eyebrow": "NEW SEASON",
             "heading": "THE NEW STANDARD",
-            "description": "Contemporary pieces designed for everyday confidence.",
+            "description": "Contemporary essentials designed for effortless, everyday style.",
             "primary_button_text": "SHOP MEN",
             "primary_button_link": "",
             "secondary_button_text": "SHOP WOMEN",
@@ -58,7 +58,7 @@
         "image_mobile": "shopify://shop_images/mens-fashion-hand-in-jeans-pocket.jpg",
         "eyebrow": "NEW SEASON",
         "heading": "THE NEW STANDARD",
-        "description": "Contemporary pieces designed for everyday confidence.",
+        "description": "Contemporary essentials designed for effortless, everyday style.",
         "primary_button_text": "SHOP MEN",
         "primary_button_link": "shopify://products/zxcvxvxcv",
         "secondary_button_text": "SHOP WOMEN",
@@ -106,7 +106,7 @@
           "type": "category",
           "settings": {
             "title": "FOOTWEAR",
-            "description": "Crafted leather shoes, boots & trainers",
+            "description": "Leather shoes, boots & sneakers",
             "link": "/collections/footwear",
             "overlay_opacity": 10
           }
@@ -115,7 +115,7 @@
           "type": "category",
           "settings": {
             "title": "ACCESSORIES",
-            "description": "Jewellery, leather bags & finishing touches",
+            "description": "Jewelry, leather bags & finishing touches",
             "link": "/collections/accessories",
             "overlay_opacity": 10
           }
@@ -133,7 +133,7 @@
           "type": "category",
           "settings": {
             "title": "SPORTS",
-            "description": "Performance apparel & training gear",
+            "description": "Performance apparel & activewear",
             "link": "/collections/sports",
             "overlay_opacity": 10
           }
@@ -180,7 +180,7 @@
         "image_position": "left",
         "eyebrow": "THE EDIT",
         "heading": "STYLE WITHOUT COMPROMISE",
-        "description": "Discover considered pieces designed to move effortlessly between everyday life and special moments.",
+        "description": "Considered silhouettes and elevated materials designed to transition seamlessly from day to night.",
         "button_text": "EXPLORE THE EDIT",
         "button_link": "/collections/all",
         "text_alignment": "left",
@@ -212,8 +212,8 @@
           "type": "badge",
           "settings": {
             "icon": "delivery",
-            "title": "COMPLIMENTARY DELIVERY",
-            "description": "On eligible orders",
+            "title": "SHIPPING & DELIVERY",
+            "description": "Complimentary on eligible orders",
             "link": ""
           }
         },
@@ -239,8 +239,8 @@
           "type": "badge",
           "settings": {
             "icon": "support",
-            "title": "CUSTOMER CARE",
-            "description": "Dedicated client assistance",
+            "title": "CUSTOMER SUPPORT",
+            "description": "Dedicated assistance team",
             "link": ""
           }
         }
@@ -265,7 +265,7 @@
       "settings": {
         "eyebrow": "THE EDIT",
         "heading": "JOIN THE EDIT",
-        "description": "Be the first to discover new arrivals, exclusive offers and seasonal edits.",
+        "description": "Subscribe for early access to new arrivals, curated edits, and exclusive offers.",
         "button_text": "SUBSCRIBE",
         "privacy_note": "By subscribing, you agree to our Privacy Policy and consent to receive marketing updates.",
         "bg_color": "soft_beige",

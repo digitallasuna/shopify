@@ -15,7 +15,7 @@
       "type": "announcement-bar",
       "settings": {
         "show_announcement": true,
-        "text": "COMPLIMENTARY DELIVERY ON ELIGIBLE ORDERS",
+        "text": "COMPLIMENTARY SHIPPING ON ELIGIBLE ORDERS",
         "link": "",
         "bg_color": "#111111",
         "text_color": "#ffffff"

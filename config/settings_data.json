@@ -21,6 +21,7 @@
     "grid_gap_desktop": 24,
     "grid_gap_mobile": 16,
     "button_corner_radius": 0,
-    "input_corner_radius": 2
+    "input_corner_radius": 2,
+    "brand_name": "Wakhan Styles"
   }
 }

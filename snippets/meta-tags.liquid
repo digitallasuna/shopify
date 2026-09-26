@@ -19,7 +19,7 @@
 
 <meta
   property="og:site_name"
-  content="{{ shop.name }}"
+  content="{{ settings.brand_name | default: shop.name | escape }}"
 >
 <meta
   property="og:url"
@@ -89,7 +89,8 @@
   {{ page_title }}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  {%- assign brand_title = settings.brand_name | default: shop.name -%}
+  {%- unless page_title contains brand_title %} &ndash; {{ brand_title }}{% endunless -%}
 </title>
 
 <link

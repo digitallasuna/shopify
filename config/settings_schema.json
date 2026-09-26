@@ -1,11 +1,27 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Meticulous Fashion",
+    "theme_name": "Wakhan Styles",
     "theme_version": "1.0.0",
-    "theme_author": "Shopify Senior Developer",
+    "theme_author": "Wakhan Styles",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "Brand Identity",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Brand name",
+        "default": "Wakhan Styles"
+      },
+      {
+        "type": "image_picker",
+        "id": "brand_logo",
+        "label": "Brand logo"
+      }
+    ]
   },
   {
     "name": "Colors",
