@@ -29,7 +29,7 @@
         "logo_offset_x": -2,
         "logo_offset_y": 0,
         "logo_width_mobile": 190,
-        "logo_offset_x_mobile": -4,
+        "logo_offset_x_mobile": 8,
         "logo_offset_y_mobile": 0,
         "menu": "main-menu",
         "use_editorial_sample_nav": true,
