@@ -170,7 +170,7 @@
     "new_arrivals": {
       "type": "featured-collection",
       "settings": {
-        "collection": "",
+        "collection": "new-arrivals",
         "eyebrow": "",
         "heading": "NEW ARRIVALS",
         "description": "Discover the latest additions to our contemporary collection.",
@@ -187,6 +187,7 @@
     "editorial_split": {
       "type": "editorial-split",
       "settings": {
+        "image": "shopify://shop_images/tailored-double-breasted-blazer.jpg",
         "image_position": "left",
         "eyebrow": "THE EDIT",
         "heading": "STYLE WITHOUT COMPROMISE",
@@ -201,7 +202,7 @@
     "curated_collection": {
       "type": "featured-collection",
       "settings": {
-        "collection": "",
+        "collection": "women",
         "eyebrow": "",
         "heading": "SEASONAL ESSENTIALS",
         "description": "Enduring staples designed with architectural precision and natural textures.",

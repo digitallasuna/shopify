@@ -18,42 +18,34 @@
           "type": "link_list",
           "settings": {
             "heading": "SHOP",
-            "menu": ""
+            "menu": "footer-shop"
           }
         },
         "menu_care": {
           "type": "link_list",
           "settings": {
             "heading": "CUSTOMER CARE",
-            "menu": ""
-          }
-        },
-        "link_list_tcHdhd": {
-          "type": "link_list",
-          "settings": {
-            "heading": "SHOP",
-            "menu": ""
+            "menu": "footer-customer-care"
           }
         },
         "menu_about": {
           "type": "link_list",
           "settings": {
             "heading": "ABOUT",
-            "menu": ""
+            "menu": "footer-about"
           }
         },
         "menu_legal": {
           "type": "link_list",
           "settings": {
             "heading": "LEGAL",
-            "menu": ""
+            "menu": "footer-legal"
           }
         }
       },
       "block_order": [
         "menu_shop",
         "menu_care",
-        "link_list_tcHdhd",
         "menu_about",
         "menu_legal"
       ],
