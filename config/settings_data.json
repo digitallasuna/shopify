@@ -37,7 +37,10 @@
   "platform_customizations": {
     "custom_css": [
       ".card {border-radius: 30px;}",
-      "@media (max-width: 749px) {.announcement-bar__text {font-size: 11px; letter-spacing: 0.05em; white-space: normal; }}"
+      "@media (max-width: 749px) {.announcement-bar__text {font-size: 11px; letter-spacing: 0.05em; white-space: normal; }}",
+      "/* Header logo lockup: mountain mark + wordmark text */.site-header__logo-link {display: inline-flex; align-items: center; gap: 12px; text-decoration: none;}",
+      ".site-header__logo-mark {width: 44px; height: 44px; object-fit: contain; flex-shrink: 0;}",
+      ".site-header__logo-text {font-size: 1.4rem; line-height: 1; letter-spacing: 0.02em; white-space: nowrap;}"
     ]
   }
 }
