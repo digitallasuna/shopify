@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "brand_name": "Wakhan Styles",
+    "brand_name": "Wakhan Style",
     "color_primary": "#111111",
     "color_background": "#F8F6F2",
     "color_surface": "#EFECE6",
@@ -36,7 +36,7 @@
   },
   "platform_customizations": {
     "custom_css": [
-      ".card {border-radius: 30px}",
+      ".card {border-radius: 30px;}",
       "@media (max-width: 749px) {.announcement-bar__text {font-size: 11px; letter-spacing: 0.05em; white-space: normal; }}"
     ]
   }
