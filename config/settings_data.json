@@ -38,9 +38,15 @@
     "custom_css": [
       ".card {border-radius: 30px;}",
       "@media (max-width: 749px) {.announcement-bar__text {font-size: 11px; letter-spacing: 0.05em; white-space: normal; }}",
-      "/* Header logo lockup: mountain mark + wordmark text */.site-header__logo-link {display: inline-flex; align-items: center; gap: 12px; text-decoration: none;}",
+      " /* Header logo lockup: mountain mark + wordmark text */.site-header__logo-link {display: inline-flex; align-items: center; gap: 12px; text-decoration: none;}",
       ".site-header__logo-mark {width: 44px; height: 44px; object-fit: contain; flex-shrink: 0;}",
-      ".site-header__logo-text {font-size: 1.4rem; line-height: 1; letter-spacing: 0.02em; white-space: nowrap;}"
+      ".site-header__logo-text {font-size: 1.4rem; line-height: 1; letter-spacing: 0.02em; white-space: nowrap;}",
+      "/* --- Subtle premium animations --- *//* (a) Slow Ken Burns zoom on hero banner images */.hero-banner__image {animation: wakhan-hero-zoom 28s ease-in-out infinite alternate; will-change: transform;}",
+      "@keyframes wakhan-hero-zoom {from {transform: scale(1); } to {transform: scale(1.07); }}",
+      "/* (b) Smooth image scale-up on hover for category and product cards */.card img {transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);}",
+      ".card:hover img {transform: scale(1.05);}",
+      "/* (c) Smooth transitions on buttons */.btn {transition: background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease;}",
+      "/* Respect reduced-motion preferences */@media (prefers-reduced-motion: reduce) {.hero-banner__image {animation: none; } .card img, .btn {transition: none; }}"
     ]
   }
 }
