@@ -657,7 +657,8 @@
     margin-inline: auto;
     padding-inline: var(--page-margin);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, max-content));
+  justify-content: start;
     gap: 2.5rem;
     align-items: start;
   }
