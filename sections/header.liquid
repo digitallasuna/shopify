@@ -62,7 +62,8 @@
                 alt: logo_alt
             }}
           {%- else -%}
-            <span class="site-header__logo-text font-heading">{{ settings.brand_name | default: shop.name }}</span>
+                      <img src="{{ 'mark-transparent.png' | file_url }}" alt="Wakhan Style" class="site-header__logo-mark" width="44" height="44" loading="eager">
+          <span class="site-header__logo-text font-heading">Wakhan Style</span>
           {%- endif -%}
         </a>
       </div>
@@ -329,7 +330,8 @@
                 alt: logo_alt
             }}
           {%- else -%}
-            <span class="site-header__logo-text font-heading">{{ settings.brand_name | default: shop.name }}</span>
+                      <img src="{{ 'mark-transparent.png' | file_url }}" alt="Wakhan Style" class="site-header__logo-mark" width="44" height="44" loading="eager">
+          <span class="site-header__logo-text font-heading">Wakhan Style</span>
           {%- endif -%}
         </a>
       </div>
