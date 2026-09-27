@@ -15,13 +15,15 @@
         "slide_A3TV6R": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/hero-01.jpg",
+            "image_mobile": "shopify://shop_images/hero-01_c1b6c9b9-f2aa-42e5-a037-42389cead95b.jpg",
             "eyebrow": "NEW SEASON",
             "heading": "THE NEW STANDARD",
             "description": "Contemporary essentials designed for effortless, everyday style.",
             "primary_button_text": "SHOP MEN",
-            "primary_button_link": "",
+            "primary_button_link": "shopify://collections/men",
             "secondary_button_text": "SHOP WOMEN",
-            "secondary_button_link": "",
+            "secondary_button_link": "shopify://collections/women",
             "content_position": "middle-center",
             "text_alignment": "center",
             "overlay_opacity": 25,
@@ -31,15 +33,15 @@
         "slide_jyYpLN": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/priscilla-du-preez-dlxLGIy-2VU-unsplash_6e4a784e-55e6-4b2a-b946-6a046608614e.jpg",
-            "image_mobile": "shopify://shop_images/priscilla-du-preez-dlxLGIy-2VU-unsplash_6e4a784e-55e6-4b2a-b946-6a046608614e.jpg",
+            "image": "shopify://shop_images/hero-02.jpg",
+            "image_mobile": "shopify://shop_images/hero-02_6a73c6c4-1e03-484a-acd4-8c5056effeaf.jpg",
             "eyebrow": "NEW SEASON",
-            "heading": "THE NEW STANDARD",
+            "heading": "STYLE THAT SPEAKS",
             "description": "Contemporary pieces designed for everyday confidence.",
             "primary_button_text": "SHOP MEN",
-            "primary_button_link": "shopify://products/zxcvxvxcv",
+            "primary_button_link": "shopify://collections/men",
             "secondary_button_text": "SHOP WOMEN",
-            "secondary_button_link": "shopify://products/fsdfsdfsdf",
+            "secondary_button_link": "shopify://collections/women",
             "content_position": "middle-center",
             "text_alignment": "center",
             "overlay_opacity": 25,
@@ -52,17 +54,21 @@
         "slide_jyYpLN"
       ],
       "settings": {
+        "enable_autoplay": true,
+        "autoplay_interval": 5,
+        "transition_style": "fade",
+        "show_arrows": true,
+        "show_dots": true,
+        "pause_on_hover": true,
         "section_height": "small",
         "full_width": true,
-        "image": "shopify://shop_images/mens-fashion-hand-in-jeans-pocket.jpg",
-        "image_mobile": "shopify://shop_images/mens-fashion-hand-in-jeans-pocket.jpg",
         "eyebrow": "NEW SEASON",
         "heading": "THE NEW STANDARD",
         "description": "Contemporary essentials designed for effortless, everyday style.",
         "primary_button_text": "SHOP MEN",
-        "primary_button_link": "shopify://products/zxcvxvxcv",
+        "primary_button_link": "shopify://collections/men",
         "secondary_button_text": "SHOP WOMEN",
-        "secondary_button_link": "shopify://products/fsdfsdfsdf",
+        "secondary_button_link": "shopify://collections/women",
         "content_position": "middle-center",
         "text_alignment": "center",
         "overlay_opacity": 50,
@@ -75,17 +81,17 @@
         "cat_men": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/young-man-in-bright-fashion.jpg",
+            "image": "shopify://shop_images/tailored-double-breasted-blazer.jpg",
             "title": "MEN",
             "description": "Tailored outerwear, shirts & denim",
-            "link": "shopify://products/zxcvxvxcv",
+            "link": "shopify://collections/men",
             "overlay_opacity": 10
           }
         },
         "cat_women": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/rack-of-womens-clothing.jpg",
+            "image": "shopify://shop_images/aurelia-wrap-midi-dress.jpg",
             "title": "WOMEN",
             "description": "Dresses, knitwear & seasonal tailoring",
             "link": "/collections/women",
@@ -95,7 +101,7 @@
         "cat_kids": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/person-in-grey-suit-and-facemask-holds-a-young-baby.jpg",
+            "image": "shopify://shop_images/kids-dino-graphic-hoodie_4f59b073-6150-4e68-a3e4-f5b5df3ff032.jpg",
             "title": "KIDS",
             "description": "Durable essentials for everyday wear",
             "link": "/collections/kids",
@@ -105,6 +111,7 @@
         "cat_footwear": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/onyx-leather-chelsea-boots_6cc4d261-6b86-4a83-942e-8b5717438668.jpg",
             "title": "FOOTWEAR",
             "description": "Leather shoes, boots & sneakers",
             "link": "/collections/footwear",
@@ -114,6 +121,7 @@
         "cat_accessories": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/structured-leather-tote_1fd7b8fe-eca6-46fe-8903-595e8578f059.jpg",
             "title": "ACCESSORIES",
             "description": "Jewelry, leather bags & finishing touches",
             "link": "/collections/accessories",
@@ -123,6 +131,7 @@
         "cat_beauty": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/velvet-matte-lipstick_6df01d4f-abfe-4f1a-b37e-8ff807f17844.jpg",
             "title": "BEAUTY",
             "description": "Formulations for skin, hair & scent",
             "link": "/collections/beauty",
@@ -132,6 +141,7 @@
         "cat_sports": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/pro-match-soccer-ball_14cd08dc-4492-445e-aac9-a593aced49b5.jpg",
             "title": "SPORTS",
             "description": "Performance apparel & activewear",
             "link": "/collections/sports",
