@@ -51,7 +51,7 @@
 
       <div class="site-header__logo-wrapper site-header__logo-wrapper--desktop">
         <a href="{{ routes.root_url }}" class="site-header__logo-link">
-          {%- if section.settings.logo != blank -%}
+          {%- if false -%}
             {%- assign logo_alt = section.settings.logo.alt | default: settings.brand_name | default: shop.name | escape -%}
             {{
               section.settings.logo
@@ -319,7 +319,7 @@
 
       <div class="site-header__logo-wrapper site-header__logo-wrapper--mobile">
         <a href="{{ routes.root_url }}" class="site-header__logo-link">
-          {%- if section.settings.logo != blank -%}
+          {%- if false -%}
             {%- assign logo_alt = section.settings.logo.alt | default: settings.brand_name | default: shop.name | escape -%}
             {{
               section.settings.logo
