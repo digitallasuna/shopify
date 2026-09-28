@@ -25,10 +25,10 @@
       "type": "header",
       "settings": {
         "logo": "shopify://shop_images/wakhan-style-logo-horizontal.png",
-        "logo_width": 275,
+        "logo_width": 300,
         "logo_offset_x": -2,
         "logo_offset_y": 0,
-        "logo_width_mobile": 190,
+        "logo_width_mobile": 200,
         "logo_offset_x_mobile": 8,
         "logo_offset_y_mobile": 0,
         "menu": "main-menu",
