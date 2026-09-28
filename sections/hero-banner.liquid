@@ -149,7 +149,7 @@
                   {%- if block.settings.tertiary_button_text != blank -%}
                     <a
                       href="{{ block.settings.tertiary_button_link | default: routes.all_products_collection_url }}"
-                      class="btn btn--secondary hero-banner__btn hero-banner__btn--secondary"
+                      class="btn btn--primary hero-banner__btn"
                     >
                       {{ block.settings.tertiary_button_text }}
                     </a>
@@ -247,7 +247,7 @@
                 {%- if section.settings.tertiary_button_text != blank -%}
                   <a
                     href="{{ section.settings.tertiary_button_link | default: routes.all_products_collection_url }}"
-                    class="btn btn--secondary hero-banner__btn hero-banner__btn--secondary"
+                    class="btn btn--primary hero-banner__btn"
                   >
                     {{ section.settings.tertiary_button_text }}
                   </a>
