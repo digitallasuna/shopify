@@ -78,7 +78,70 @@
           {%- if product.variants.size > 1 -%}
             <div class="form-group product-form__variants">
               <label for="ProductSelect-{{ section.id }}" class="form-label text-eyebrow">
-                Select Option
+                </label>
+<style>
+select#ProductSelect-{{ section.id }}{display:none!important}
+.ws-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin:.5rem 0 0}
+.ws-pill{position:relative;cursor:pointer}
+.ws-pill input{position:absolute;opacity:0;width:1px;height:1px}
+.ws-pill span{display:inline-block;min-width:3rem;padding:.65rem 1rem;border:1px solid #171717;background:#fff;color:#171717;text-align:center;font-size:.875rem;line-height:1}
+.ws-pill input:checked+span{background:#171717;color:#fff}
+.ws-pill input:focus-visible+span{outline:2px solid #6F1D2A;outline-offset:2px}
+</style>
+<div data-ws-options>
+{%- for option in product.options_with_values -%}
+<div class="form-group">
+<span class="form-label text-eyebrow">{{ option.name }}</span>
+<div class="ws-pills">
+{%- for value in option.values -%}
+<label class="ws-pill"><input type="radio" name="ws-option-{{ option.position }}" value="{{ value | escape }}" data-ws-position="{{ option.position }}"{% if option.selected_value == value %} checked{% endif %}><span>{{ value }}</span></label>
+{%- endfor -%}
+</div>
+</div>
+{%- endfor -%}
+</div>
+<script>
+(function(){
+var c=document.querySelector('[data-ws-options]');
+if(!c)return;
+var s=document.getElementById('ProductSelect-{{ section.id }}');
+var b=document.getElementById('AddToCart-{{ section.id }}');
+var vs={{ product.variants | json }};
+function sel(){
+var r=Array.prototype.slice.call(c.querySelectorAll('input[type=radio]:checked'));
+r.sort(function(a,b){return a.getAttribute('data-ws-position')-b.getAttribute('data-ws-position');});
+return r.map(function(x){return x.value;});
+}
+function find(v){
+for(var i=0;i<vs.length;i++){
+var ok=true;
+for(var j=0;j<v.length;j++){
+if(vs[i]['option'+(j+1)]!==v[j]){ok=false;break;}
+}
+if(ok)return vs[i];
+}
+return null;
+}
+function sync(){
+var v=find(sel());
+if(!v)return;
+if(s){s.value=v.id;s.dispatchEvent(new Event('change',{bubbles:true}));}
+if(b){
+b.disabled=!v.available;
+var t=b.querySelector('span');
+if(t)t.textContent=v.available?'Add to Bag':'Sold Out';
+}
+}
+}
+}
+c.addEventListener('change',sync);
+sync();
+})();
+</script>
+sync();
+})();
+</script>
+<label style="display:none" aria-hidden="true">
               </label>
               <select
                 name="id"
