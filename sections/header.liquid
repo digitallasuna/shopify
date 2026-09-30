@@ -294,7 +294,11 @@
                   <div class="mega-menu__container">
                     {%- for child in link.links -%}
                       <div class="mega-menu__column">
-                        <a href="{{ child.url }}" class="mega-menu__title text-eyebrow">{{ child.title }}</a>
+                        {%- if child.links.size > 0 or child.title == 'Men' or child.title == 'Women' or child.title == 'Kid' -%}
+                          <a href="{{ child.url }}" class="mega-menu__title text-eyebrow">{{ child.title }}</a>
+                        {%- else -%}
+                          <a href="{{ child.url }}" class="mega-menu__link">{{ child.title }}</a>
+                        {%- endif -%}
                         {%- if child.links.size > 0 -%}
                           <ul class="mega-menu__list" role="list">
                             {%- for grandchild in child.links -%}
