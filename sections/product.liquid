@@ -100,46 +100,6 @@ select#ProductSelect-{{ section.id }}{display:none!important}
 </div>
 {%- endfor -%}
 </div>
-<script>
-
-(function(){
-var c=document.querySelector('[data-ws-options]');
-if(!c)return;
-var s=document.getElementById('ProductSelect-{{ section.id }}');
-var b=document.getElementById('AddToCart-{{ section.id }}');
-var vs={{ product.variants | json }};
-function sel(){
-var r=Array.prototype.slice.call(c.querySelectorAll('input[type=radio]:checked'));
-r.sort(function(a,b){return a.getAttribute('data-ws-position')-b.getAttribute('data-ws-position');});
-return r.map(function(x){return x.value;});
-}
-function find(v){
-for(var i=0;i<vs.length;i++){
-var ok=true;
-for(var j=0;j<v.length;j++){
-if(vs[i]['option'+(j+1)]!==v[j]){ok=false;break;}
-}
-if(ok)return vs[i];
-}
-return null;
-}
-function sync(){
-var v=find(sel());
-if(!v)return;
-if(s){s.value=v.id;s.dispatchEvent(new Event('change',{bubbles:true}));}
-if(b){
-b.disabled=!v.available;
-var t=b.querySelector('span');
-if(t)t.textContent=v.available?'Add to Bag':'Sold Out';
-}
-}
-}
-}
-c.addEventListener('change',sync);var frm=c.closest('form');if(frm){frm.addEventListener('submit',function(){var vv=find(sel());if(vv){var se=document.getElementById('ProductSelect-{{ section.id }}');if(se){se.value=vv.id;}}});}
-sync();
-})();
-</script>
-</script>
 <label style="display:none" aria-hidden="true">
               </label>
               <select
@@ -158,6 +118,39 @@ sync();
                   </option>
                 {%- endfor -%}
               </select>
+              <script>
+(function(){
+var c=document.querySelector('[data-ws-options]');
+if(!c)return;
+var vs={{ product.variants | json }};
+function byId(id){return document.getElementById(id);}
+function sel(){
+var r=Array.prototype.slice.call(c.querySelectorAll('input[type=radio]:checked'));
+r.sort(function(a,b){return a.getAttribute('data-ws-position')-b.getAttribute('data-ws-position');});
+return r.map(function(x){return x.value;});
+}
+function find(v){
+for(var i=0;i<vs.length;i++){
+var ok=true;
+for(var j=0;j<v.length;j++){if(vs[i]['option'+(j+1)]!==v[j]){ok=false;break;}}
+if(ok)return vs[i];
+}
+return null;
+}
+function sync(){
+var v=find(sel());
+if(!v)return;
+var s=byId('ProductSelect-{{ section.id }}');
+if(s){s.value=v.id;s.dispatchEvent(new Event('change',{bubbles:true}));}
+var b=byId('AddToCart-{{ section.id }}');
+if(b){b.disabled=!v.available;var t=b.querySelector('span');if(t)t.textContent=v.available?'Add to Bag':'Sold Out';}
+}
+c.addEventListener('change',sync);
+var frm=c.closest('form');
+if(frm){frm.addEventListener('submit',function(){var vv=find(sel());if(vv){var se=byId('ProductSelect-{{ section.id }}');if(se)se.value=vv.id;}});}
+sync();
+})();
+</script>
             </div>
           {%- else -%}
             <input type="hidden" name="id" value="{{ current_variant.id }}">
