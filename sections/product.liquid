@@ -101,7 +101,7 @@ select#ProductSelect-{{ section.id }}{display:none!important}
 {%- endfor -%}
 </div>
 <script>
-document.addEventListener('DOMContentLoaded',function(){
+
 (function(){
 var c=document.querySelector('[data-ws-options]');
 if(!c)return;
@@ -137,7 +137,7 @@ if(t)t.textContent=v.available?'Add to Bag':'Sold Out';
 }
 c.addEventListener('change',sync);var frm=c.closest('form');if(frm){frm.addEventListener('submit',function(){var vv=find(sel());if(vv){var se=document.getElementById('ProductSelect-{{ section.id }}');if(se){se.value=vv.id;}}});}
 sync();
-})();});
+})();
 </script>
 </script>
 <label style="display:none" aria-hidden="true">
