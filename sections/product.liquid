@@ -87,20 +87,51 @@ select#ProductSelect-{{ section.id }}{display:none!important}
 .ws-pill span{display:inline-block;min-width:3rem;padding:.65rem 1rem;border:1px solid #171717;background:#fff;color:#171717;text-align:center;font-size:.875rem;line-height:1}
 .ws-pill input:checked+span{background:#171717;color:#fff}
 .ws-pill input:focus-visible+span{outline:2px solid #6F1D2A;outline-offset:2px}
+.ws-swatches{display:flex;flex-wrap:wrap;gap:.6rem;margin:.5rem 0 0}
+.ws-swatch{position:relative;cursor:pointer;width:2.25rem;height:2.25rem;border-radius:9999px}
+.ws-swatch input{position:absolute;opacity:0;width:1px;height:1px}
+.ws-swatch span{display:block;width:100%;height:100%;border-radius:9999px;border:1px solid #d8d4cc}
+.ws-swatch input:checked+span{outline:2px solid #171717;outline-offset:2px}
+.ws-swatch input:focus-visible+span{outline:2px solid #6F1D2A;outline-offset:2px}
 </style>
 <div data-ws-options>
 {%- for option in product.options_with_values -%}
 <div class="form-group">
-<span class="form-label text-eyebrow">{{ option.name }}</span>
+<span class="form-label text-eyebrow">{{ option.name }}{%- if option.name == 'Color' -%} &mdash; <span data-ws-selected></span>{%- endif -%}</span>
+{%- if option.name == 'Color' -%}
+<div class="ws-swatches">
+{%- for value in option.values -%}
+{%- assign cn = value | downcase -%}
+{%- assign sw = cn -%}
+{%- case cn -%}
+{%- when 'charcoal' -%}{%- assign sw = '#3b3b3d' -%}
+{%- when 'black' -%}{%- assign sw = '#141414' -%}
+{%- when 'navy' -%}{%- assign sw = '#1f2d50' -%}
+{%- when 'olive' -%}{%- assign sw = '#6b7245' -%}
+{%- when 'white' -%}{%- assign sw = '#ffffff' -%}
+{%- when 'grey' -%}{%- assign sw = '#8a8a8a' -%}
+{%- when 'gray' -%}{%- assign sw = '#8a8a8a' -%}
+{%- when 'burgundy' -%}{%- assign sw = '#6f1d2a' -%}
+{%- when 'beige' -%}{%- assign sw = '#e8e0d0' -%}
+{%- when 'brown' -%}{%- assign sw = '#6b4a2f' -%}
+{%- when 'red' -%}{%- assign sw = '#c0392b' -%}
+{%- when 'blue' -%}{%- assign sw = '#2c5fa3' -%}
+{%- when 'green' -%}{%- assign sw = '#2e7d4f' -%}
+{%- when 'pink' -%}{%- assign sw = '#e8a0b4' -%}
+{%- endcase -%}
+<label class="ws-swatch" title="{{ value | escape }}"><input type="radio" name="ws-option-{{ option.position }}" value="{{ value | escape }}" data-ws-position="{{ option.position }}" data-ws-color="1" aria-label="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %}><span style="background:{{ sw }}"></span></label>
+{%- endfor -%}
+</div>
+{%- else -%}
 <div class="ws-pills">
 {%- for value in option.values -%}
 <label class="ws-pill"><input type="radio" name="ws-option-{{ option.position }}" value="{{ value | escape }}" data-ws-position="{{ option.position }}"{% if option.selected_value == value %} checked{% endif %}><span>{{ value }}</span></label>
 {%- endfor -%}
 </div>
+{%- endif -%}
 </div>
 {%- endfor -%}
-</div>
-<label style="display:none" aria-hidden="true">
+</div><label style="display:none" aria-hidden="true">
               </label>
               <select
                 name="id"
@@ -144,6 +175,7 @@ var s=byId('ProductSelect-{{ section.id }}');
 if(s){s.value=v.id;s.dispatchEvent(new Event('change',{bubbles:true}));}
 var b=byId('AddToCart-{{ section.id }}');
 if(b){b.disabled=!v.available;var t=b.querySelector('span');if(t)t.textContent=v.available?'Add to Bag':'Sold Out';}
+var csc=c.querySelector('[data-ws-selected]');if(csc){var cr=c.querySelector('input[data-ws-color]:checked');csc.textContent=cr?cr.value:'';}
 }
 c.addEventListener('change',sync);
 var frm=c.closest('form');
