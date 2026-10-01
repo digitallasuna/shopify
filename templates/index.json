@@ -73,8 +73,8 @@
         "primary_button_link": "shopify://collections/men",
         "secondary_button_text": "SHOP WOMEN",
         "secondary_button_link": "shopify://collections/women",
-            "tertiary_button_text": "SHOP KIDS",
-            "tertiary_button_link": "shopify://collections/kids",
+        "tertiary_button_text": "SHOP KIDS",
+        "tertiary_button_link": "shopify://collections/kids",
         "content_position": "middle-center",
         "text_alignment": "center",
         "overlay_opacity": 50,
@@ -88,29 +88,9 @@
           "type": "category",
           "settings": {
             "image": "shopify://shop_images/tailored-double-breasted-blazer.jpg",
-            "title": "MEN",
+            "title": "CLOTHES",
             "description": "Tailored outerwear, shirts & denim",
-            "link": "shopify://collections/men",
-            "overlay_opacity": 10
-          }
-        },
-        "cat_women": {
-          "type": "category",
-          "settings": {
-            "image": "shopify://shop_images/aurelia-wrap-midi-dress.jpg",
-            "title": "WOMEN",
-            "description": "Dresses, knitwear & seasonal tailoring",
-            "link": "/collections/women",
-            "overlay_opacity": 10
-          }
-        },
-        "cat_kids": {
-          "type": "category",
-          "settings": {
-            "image": "shopify://shop_images/kids-dino-graphic-hoodie_4f59b073-6150-4e68-a3e4-f5b5df3ff032.jpg",
-            "title": "KIDS",
-            "description": "Durable essentials for everyday wear",
-            "link": "/collections/kids",
+            "link": "/collections/clothes",
             "overlay_opacity": 10
           }
         },
@@ -120,7 +100,7 @@
             "image": "shopify://shop_images/onyx-leather-chelsea-boots_6cc4d261-6b86-4a83-942e-8b5717438668.jpg",
             "title": "FOOTWEAR",
             "description": "Leather shoes, boots & sneakers",
-            "link": "/collections/footwear",
+            "link": "/collections/all-footwear",
             "overlay_opacity": 10
           }
         },
@@ -130,7 +110,7 @@
             "image": "shopify://shop_images/structured-leather-tote_1fd7b8fe-eca6-46fe-8903-595e8578f059.jpg",
             "title": "ACCESSORIES",
             "description": "Jewelry, leather bags & finishing touches",
-            "link": "/collections/accessories",
+            "link": "/collections/all-accessories",
             "overlay_opacity": 10
           }
         },
@@ -140,7 +120,7 @@
             "image": "shopify://shop_images/velvet-matte-lipstick_6df01d4f-abfe-4f1a-b37e-8ff807f17844.jpg",
             "title": "BEAUTY",
             "description": "Formulations for skin, hair & scent",
-            "link": "/collections/beauty",
+            "link": "/collections/all-beauty",
             "overlay_opacity": 10
           }
         },
@@ -150,15 +130,13 @@
             "image": "shopify://shop_images/pro-match-soccer-ball_14cd08dc-4492-445e-aac9-a593aced49b5.jpg",
             "title": "SPORTS",
             "description": "Performance apparel & activewear",
-            "link": "/collections/sports",
+            "link": "/collections/all-sports",
             "overlay_opacity": 10
           }
         }
       },
       "block_order": [
         "cat_men",
-        "cat_women",
-        "cat_kids",
         "cat_footwear",
         "cat_accessories",
         "cat_beauty",
