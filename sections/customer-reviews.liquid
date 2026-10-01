@@ -1,0 +1,110 @@
+{% comment %}
+  Customer Reviews — Testimonials section with star ratings.
+{% endcomment %}
+
+<section class="customer-reviews" data-section-id="{{ section.id }}">
+  <div class="customer-reviews__inner">
+    {% if section.settings.heading != blank %}
+      <div class="customer-reviews__header">
+        <h2 class="customer-reviews__heading">{{ section.settings.heading }}</h2>
+        {% if section.settings.subheading != blank %}
+          <p class="customer-reviews__subheading">{{ section.settings.subheading }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if section.blocks.size > 0 %}
+      <div class="customer-reviews__grid">
+        {% for block in section.blocks %}
+          {% assign rating = block.settings.rating | default: 5 %}
+          <article class="customer-reviews__card" {{ block.shopify_attributes }}>
+            <div class="customer-reviews__stars" role="img" aria-label="Rated {{ rating }} out of 5 stars">
+              {% for i in (1..5) %}
+                {% if i <= rating %}
+                  <span class="customer-reviews__star customer-reviews__star--filled" aria-hidden="true">★</span>
+                {% else %}
+                  <span class="customer-reviews__star" aria-hidden="true">★</span>
+                {% endif %}
+              {% endfor %}
+            </div>
+            {% if block.settings.review_text != blank %}
+              <blockquote class="customer-reviews__quote">{{ block.settings.review_text }}</blockquote>
+            {% endif %}
+            <div class="customer-reviews__author">
+              {% if block.settings.name != blank %}
+                <span class="customer-reviews__name">{{ block.settings.name }}</span>
+              {% endif %}
+              {% if block.settings.location != blank %}
+                <span class="customer-reviews__location">{{ block.settings.location }}</span>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .customer-reviews { background-color: #F8F6F2; padding: 72px 0; }
+  .customer-reviews__inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .customer-reviews__header { text-align: center; margin-bottom: 48px; }
+  .customer-reviews__heading { font-family: Garamond, 'EB Garamond', 'Adobe Garamond Pro', Georgia, serif; font-size: 40px; font-weight: 400; color: #1a1a1a; margin: 0 0 12px; }
+  .customer-reviews__subheading { font-size: 16px; color: #5a5a5a; margin: 0; }
+  .customer-reviews__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .customer-reviews__card { background-color: #ffffff; border: 1px solid #e8e1d5; border-radius: 6px; padding: 32px 28px; display: flex; flex-direction: column; gap: 16px; }
+  .customer-reviews__stars { display: flex; gap: 4px; }
+  .customer-reviews__star { color: #d9d2c3; font-size: 18px; line-height: 1; }
+  .customer-reviews__star--filled { color: #6F1D2A; }
+  .customer-reviews__quote { margin: 0; font-size: 16px; line-height: 1.65; color: #333333; flex: 1; }
+  .customer-reviews__author { display: flex; flex-direction: column; gap: 2px; }
+  .customer-reviews__name { font-weight: 700; font-size: 15px; color: #1a1a1a; }
+  .customer-reviews__location { font-size: 13px; color: #6F1D2A; }
+  @media (max-width: 900px) { .customer-reviews__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) {
+    .customer-reviews { padding: 48px 0; }
+    .customer-reviews__grid { grid-template-columns: 1fr; }
+    .customer-reviews__heading { font-size: 30px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Customer Reviews",
+  "tag": "section",
+  "class": "customer-reviews-section",
+  "enabled_on": {
+    "templates": ["*"],
+    "groups": ["footer"]
+  },
+  "max_blocks": 12,
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "What Our Customers Say" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Real reviews from verified customers" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "textarea", "id": "review_text", "label": "Review text" },
+        { "type": "text", "id": "name", "label": "Reviewer name" },
+        { "type": "text", "id": "location", "label": "Reviewer city" },
+        { "type": "range", "id": "rating", "label": "Star rating", "min": 1, "max": 5, "step": 1, "default": 5 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "review_text": "The Alpine Heavyweight Hoodie is the best purchase I've made this year. Thick, warm, and the fit is perfect.", "name": "Marcus T.", "location": "New York", "rating": 5 } },
+        { "type": "review", "settings": { "review_text": "Ordered the suede ankle boots for fall and I haven't taken them off since. Comfortable right out of the box.", "name": "Emily R.", "location": "Chicago", "rating": 5 } },
+        { "type": "review", "settings": { "review_text": "Beautiful dress, great fabric. Shipping took a day longer than expected, but customer service kept me updated the whole time.", "name": "Sofia L.", "location": "Austin", "rating": 4 } },
+        { "type": "review", "settings": { "review_text": "The leather tote fits my laptop, lunch, and everything else. Quality feels way above the price.", "name": "James W.", "location": "Seattle", "rating": 5 } },
+        { "type": "review", "settings": { "review_text": "Finally, a lipstick that lasts through coffee and meetings. The shade is exactly as pictured.", "name": "Aisha K.", "location": "Houston", "rating": 5 } },
+        { "type": "review", "settings": { "review_text": "Bought the soccer ball for my son's practice — durable, great grip, and it looks sharp.", "name": "David M.", "location": "Denver", "rating": 5 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -11,6 +11,77 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
+    "customer_reviews": {
+      "type": "customer-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "review_text": "The Alpine Heavyweight Hoodie is the best purchase I've made this year. Thick, warm, and the fit is perfect.",
+            "name": "Marcus T.",
+            "location": "New York",
+            "rating": 5
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "review_text": "Ordered the suede ankle boots for fall and I haven't taken them off since. Comfortable right out of the box.",
+            "name": "Emily R.",
+            "location": "Chicago",
+            "rating": 5
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "review_text": "Beautiful dress, great fabric. Shipping took a day longer than expected, but customer service kept me updated the whole time.",
+            "name": "Sofia L.",
+            "location": "Austin",
+            "rating": 4
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "review_text": "The leather tote fits my laptop, lunch, and everything else. Quality feels way above the price.",
+            "name": "James W.",
+            "location": "Seattle",
+            "rating": 5
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "review_text": "Finally, a lipstick that lasts through coffee and meetings. The shade is exactly as pictured.",
+            "name": "Aisha K.",
+            "location": "Houston",
+            "rating": 5
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "review_text": "Bought the soccer ball for my son's practice — durable, great grip, and it looks sharp.",
+            "name": "David M.",
+            "location": "Denver",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6"
+      ],
+      "settings": {
+        "heading": "What Our Customers Say",
+        "subheading": "Real reviews from verified customers"
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -64,6 +135,7 @@
     }
   },
   "order": [
+    "customer_reviews",
     "footer"
   ]
 }
