@@ -87,7 +87,7 @@
         "cat_men": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/tailored-double-breasted-blazer.jpg",
+            "image": "shopify://shop_images/media-generation-alpine-hoodie-olive-0-7c2920a5-938b-4a38-a824-fe45de245710_cf092b3a-74a9-409c-be0f-043e589258ee.webp",
             "title": "CLOTHES",
             "description": "Tailored outerwear, shirts & denim",
             "link": "/collections/clothes",
@@ -97,7 +97,7 @@
         "cat_footwear": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/onyx-leather-chelsea-boots_6cc4d261-6b86-4a83-942e-8b5717438668.jpg",
+            "image": "shopify://shop_images/suede-ankle-boots.jpg",
             "title": "FOOTWEAR",
             "description": "Leather shoes, boots & sneakers",
             "link": "/collections/all-footwear",
@@ -107,7 +107,7 @@
         "cat_accessories": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/structured-leather-tote_1fd7b8fe-eca6-46fe-8903-595e8578f059.jpg",
+            "image": "shopify://shop_images/structured-leather-tote.jpg",
             "title": "ACCESSORIES",
             "description": "Jewelry, leather bags & finishing touches",
             "link": "/collections/all-accessories",
@@ -117,7 +117,7 @@
         "cat_beauty": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/velvet-matte-lipstick_6df01d4f-abfe-4f1a-b37e-8ff807f17844.jpg",
+            "image": "shopify://shop_images/velvet-matte-lipstick.jpg",
             "title": "BEAUTY",
             "description": "Formulations for skin, hair & scent",
             "link": "/collections/all-beauty",
@@ -127,7 +127,7 @@
         "cat_sports": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/pro-match-soccer-ball_14cd08dc-4492-445e-aac9-a593aced49b5.jpg",
+            "image": "shopify://shop_images/pro-match-soccer-ball.jpg",
             "title": "SPORTS",
             "description": "Performance apparel & activewear",
             "link": "/collections/all-sports",
@@ -146,7 +146,7 @@
         "eyebrow": "",
         "heading": "SHOP BY CATEGORY",
         "description": "Explore curated collections crafted for the modern wardrobe.",
-        "columns_desktop": 4,
+        "columns_desktop": 5,
         "media_aspect_ratio": "portrait",
         "section_spacing": "small"
       }
