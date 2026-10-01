@@ -200,103 +200,6 @@
         "section_spacing": "small"
       }
     },
-    "custom_section_zqFe8C": {
-      "type": "custom-section",
-      "blocks": {
-        "text_bqjz74": {
-          "type": "text",
-          "name": "t:general.text",
-          "settings": {
-            "text": "What Our Customers Say",
-            "text_style": "text--title",
-            "alignment": "center"
-          },
-          "blocks": {}
-        },
-        "text_i9z4G7": {
-          "type": "text",
-          "name": "t:general.text",
-          "settings": {
-            "text": "Real reviews from verified customers",
-            "text_style": "text--subtitle",
-            "alignment": "center"
-          },
-          "blocks": {}
-        },
-        "text_zAjUmi": {
-          "type": "text",
-          "name": "t:general.text",
-          "settings": {
-            "text": "★★★★★ \"The Alpine Heavyweight Hoodie is the best purchase I've made this year. Thick, warm, and the fit is perfect.\" — Marcus T., New York",
-            "text_style": "text--normal",
-            "alignment": "left"
-          },
-          "blocks": {}
-        },
-        "text_agVQEP": {
-          "type": "text",
-          "name": "t:general.text",
-          "settings": {
-            "text": "★★★★★ \"Ordered the suede ankle boots for fall and I haven't taken them off since. Comfortable right out of the box.\" — Emily R., Chicago",
-            "text_style": "text--normal",
-            "alignment": "left"
-          },
-          "blocks": {}
-        },
-        "text_zyMy4N": {
-          "type": "text",
-          "name": "t:general.text",
-          "settings": {
-            "text": "★★★★☆ \"Beautiful dress, great fabric. Shipping took a day longer than expected, but customer service kept me updated the whole time.\" — Sofia L., Austin",
-            "text_style": "text--normal",
-            "alignment": "left"
-          },
-          "blocks": {}
-        },
-        "text_VYFceF": {
-          "type": "text",
-          "name": "t:general.text",
-          "settings": {
-            "text": "★★★★★ \"The leather tote fits my laptop, lunch, and everything else. Quality feels way above the price.\" — James W., Seattle",
-            "text_style": "text--normal",
-            "alignment": "left"
-          },
-          "blocks": {}
-        },
-        "text_adXeMj": {
-          "type": "text",
-          "name": "t:general.text",
-          "settings": {
-            "text": "★★★★★ \"Finally, a lipstick that lasts through coffee and meetings. The shade is exactly as pictured.\" — Aisha K., Houston",
-            "text_style": "text--normal",
-            "alignment": "left"
-          },
-          "blocks": {}
-        },
-        "text_3VPW4g": {
-          "type": "text",
-          "name": "t:general.text",
-          "settings": {
-            "text": "★★★★★ \"Bought the soccer ball for my son's practice — durable, great grip, and it looks sharp.\" — David M., Denver",
-            "text_style": "text--normal",
-            "alignment": "left"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_bqjz74",
-        "text_i9z4G7",
-        "text_zAjUmi",
-        "text_agVQEP",
-        "text_zyMy4N",
-        "text_VYFceF",
-        "text_adXeMj",
-        "text_3VPW4g"
-      ],
-      "name": "t:general.custom_section",
-      "settings": {}
-    },
     "trust_badges": {
       "type": "trust-badges",
       "blocks": {
@@ -372,7 +275,6 @@
     "new_arrivals",
     "editorial_split",
     "curated_collection",
-    "custom_section_zqFe8C",
     "trust_badges",
     "newsletter"
   ]
